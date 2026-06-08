@@ -1,0 +1,67 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Core — Buttons, Badges, Card, Avatar" subtitle="Pill buttons, status badges, content card" -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: var(--color-bg); font-family: var(--font-body); }
+  #root { padding: var(--space-6); }
+  .group { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; width: 100%; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+  const { Button, Badge, Card, Avatar } = window.JOHAKDesignSystem_350c1a;
+  function Demo() {
+    return (
+      <div>
+        <div className="group">
+          <span className="label">Buttons</span>
+          <Button variant="primary">Anmelden</Button>
+          <Button variant="accent">Tag der offenen Tür</Button>
+          <Button variant="highlight">Highlight</Button>
+          <Button variant="secondary">Mehr erfahren</Button>
+          <Button variant="ghost">Abbrechen</Button>
+          <Button variant="primary" disabled>Gesperrt</Button>
+        </div>
+        <div className="group">
+          <span className="label">Sizes</span>
+          <Button size="sm" variant="primary">Small</Button>
+          <Button size="md" variant="primary">Medium</Button>
+          <Button size="lg" variant="primary">Large</Button>
+        </div>
+        <div className="group">
+          <span className="label">Badges</span>
+          <Badge tone="primary">Petrol</Badge>
+          <Badge tone="accent" variant="solid">Neu</Badge>
+          <Badge tone="success">Aktiv</Badge>
+          <Badge tone="warning">Frist</Badge>
+          <Badge tone="sky" variant="outline">HAK</Badge>
+          <Badge tone="neutral">2025/26</Badge>
+        </div>
+        <div className="group">
+          <span className="label">Card + Avatar</span>
+          <Card accent="signet" elevation="md" style={{ maxWidth: 320 }}>
+            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+              <Avatar name="Lena Huber" tone="petrol" />
+              <div>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--text-strong)" }}>Lena Huber</div>
+                <div style={{ fontSize: 13, color: "var(--text-muted)" }}>3BK · Schülerin</div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+</script>
+</body>
+</html>

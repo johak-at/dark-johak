@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Signet gradient & accent bar" subtitle="The four-colour mark expressed as gradients" -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--color-surface); font-family: var(--font-body); }
+  .wrap { padding: var(--space-5); display: grid; gap: 14px; }
+  .grad { height: 46px; border-radius: var(--radius-md); display: flex; align-items: center; padding: 0 16px; color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 13px; }
+  .label { font-size: 11px; color: var(--text-muted); margin-bottom: -8px; font-weight: 600; }
+  .bar { height: 8px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="label">--gradient-signet</div>
+    <div class="grad" style="background:var(--gradient-signet)">Night → Petrol → Sky</div>
+    <div class="label">--gradient-sky</div>
+    <div class="grad" style="background:var(--gradient-sky)">Petrol → Sky</div>
+    <div class="label">.johak-accent-bar (four-colour)</div>
+    <span class="johak-accent-bar bar" style="width:100%"></span>
+  </div>
+</body>
+</html>

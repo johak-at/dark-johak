@@ -4,6 +4,15 @@
 - **Package Manager**: pnpm
 - **Add-ons**: prettier, eslint, tailwindcss, mcp
 
+## Mandatory project rules (all agents)
+
+1. **Style only with the JO.HAK Design System** in `design-system/`. Do not invent
+   colors, fonts, spacing, radii, shadows, or motion — use its tokens (semantic aliases preferred) and
+   components. Read its `readme.md` and `SKILL.md` first.
+2. **Use only pnpm** — never `npm` or `yarn` (use `pnpm dlx`, not `npx`).
+
+Full details: [CLAUDE.md](CLAUDE.md) (also mirrored for Copilot in `.github/copilot-instructions.md`).
+
 ---
 
 You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:

@@ -1,0 +1,36 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Neutral scale" subtitle="Cool greys drawn toward night blue — 0 → 950" -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--color-surface); font-family: var(--font-body); }
+  .wrap { padding: var(--space-5); }
+  .row { display: flex; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .c { flex: 1; height: 64px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; font-size: 10px; }
+  .labels { display: flex; margin-top: 8px; }
+  .l { flex: 1; text-align: center; font-size: 10px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row">
+      <div class="c" style="background:var(--neutral-50)"></div>
+      <div class="c" style="background:var(--neutral-100)"></div>
+      <div class="c" style="background:var(--neutral-200)"></div>
+      <div class="c" style="background:var(--neutral-300)"></div>
+      <div class="c" style="background:var(--neutral-400)"></div>
+      <div class="c" style="background:var(--neutral-500); color:#fff">500</div>
+      <div class="c" style="background:var(--neutral-600); color:#fff"></div>
+      <div class="c" style="background:var(--neutral-700); color:#fff"></div>
+      <div class="c" style="background:var(--neutral-800); color:#fff"></div>
+      <div class="c" style="background:var(--neutral-900); color:#fff"></div>
+      <div class="c" style="background:var(--neutral-950); color:#fff"></div>
+    </div>
+    <div class="labels">
+      <div class="l">50</div><div class="l">100</div><div class="l">200</div><div class="l">300</div><div class="l">400</div><div class="l">500</div><div class="l">600</div><div class="l">700</div><div class="l">800</div><div class="l">900</div><div class="l">950</div>
+    </div>
+  </div>
+</body>
+</html>

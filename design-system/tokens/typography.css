@@ -1,0 +1,65 @@
+/* ============================================================
+   JO.HAK — TYPOGRAPHY TOKENS
+   Headline:  Coco Gothic  (geometric, friendly, art-deco edge)
+   Body/UI:   Open Sans (humanist grotesque — readable, matches johak.at)
+   Claim:     Antro Vectra (signature script — accents only)
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --font-display: "Coco Gothic", "Jost", system-ui, sans-serif;
+  --font-body:    "Open Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-script:  "Antro Vectra", "Snell Roundhand", cursive;
+  --font-mono:    ui-monospace, "SFMono-Regular", "Menlo", monospace;
+
+  /* ---- Weights ---- */
+  --fw-thin:    200; /* @kind font */
+  --fw-light:   300; /* @kind font */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium:  500; /* @kind font */
+  --fw-semibold:600; /* @kind font */
+  --fw-bold:    700; /* @kind font */
+  --fw-heavy:   900; /* @kind font */
+
+  /* ---- Type scale (1.250 major-third, 16px base) ---- */
+  --text-2xs: 0.6875rem; /* 11 */
+  --text-xs:  0.75rem;   /* 12 */
+  --text-sm:  0.875rem;  /* 14 */
+  --text-base:1rem;      /* 16 */
+  --text-md:  1.125rem;  /* 18 */
+  --text-lg:  1.375rem;  /* 22 */
+  --text-xl:  1.75rem;   /* 28 */
+  --text-2xl: 2.25rem;   /* 36 */
+  --text-3xl: 2.875rem;  /* 46 */
+  --text-4xl: 3.75rem;   /* 60 */
+  --text-5xl: 4.75rem;   /* 76 */
+
+  /* ---- Line heights ---- */
+  --leading-tight:   1.05;
+  --leading-snug:    1.2;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.65;
+
+  /* ---- Letter spacing ---- */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-wider:  0.12em; /* eyebrows / labels */
+
+  /* ---- Semantic type roles ---- */
+  --type-display-font: var(--font-display);
+  --type-display-weight: var(--fw-bold);
+  --type-display-leading: var(--leading-tight);
+  --type-display-tracking: var(--tracking-tight);
+
+  --type-heading-font: var(--font-display);
+  --type-heading-weight: var(--fw-bold);
+
+  --type-eyebrow-font: var(--font-body);
+  --type-eyebrow-weight: var(--fw-semibold);
+  --type-eyebrow-tracking: var(--tracking-wider);
+
+  --type-body-font: var(--font-body);
+  --type-body-weight: var(--fw-regular);
+  --type-body-leading: var(--leading-relaxed);
+}

@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Brand darks" subtitle="Farbe 5 — night blue & warm black" -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--color-surface); font-family: var(--font-body); }
+  .wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); padding: var(--space-5); }
+  .sw { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .chip { height: 74px; }
+  .meta { padding: 10px 12px; }
+  .name { font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text-strong); }
+  .hex { font-size: 12px; color: var(--text-muted); }
+  .role { font-size: 11px; color: var(--text-subtle); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="sw"><div class="chip" style="background:var(--johak-navy)"></div><div class="meta"><div class="name">Night Blue</div><div class="hex">#1A2E3C</div><div class="role">Farbe 5 · surfaces, inverse</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--johak-ink)"></div><div class="meta"><div class="name">Warm Black</div><div class="hex">#180F00</div><div class="role">Black 6 · strong text</div></div></div>
+  </div>
+</body>
+</html>

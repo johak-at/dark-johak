@@ -1,0 +1,27 @@
+<!-- @dsCard group="Brand" viewport="700x230" name="Signet & reversed logo" subtitle="The four-colour mark on light and on night blue" -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-body); }
+  .wrap { display: grid; grid-template-columns: 1fr 1fr 1fr; height: 230px; }
+  .cell { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+  .light { background: var(--color-surface); }
+  .soft { background: var(--neutral-100); }
+  .dark { background: var(--johak-navy); }
+  .cell img { height: 120px; }
+  .lbl { font-size: 11px; letter-spacing: .04em; }
+  .light .lbl, .soft .lbl { color: var(--text-muted); }
+  .dark .lbl { color: rgba(255,255,255,.6); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="cell light"><img src="../assets/logos/johak-signet.png" alt="Signet" /><span class="lbl">Signet</span></div>
+    <div class="cell soft"><img src="../assets/logos/johak-vertical.png" alt="Logo on light" style="height:150px" /><span class="lbl">Auf Hellgrau</span></div>
+    <div class="cell dark"><img src="../assets/logos/johak-vertical-white.png" alt="Logo reversed" style="height:150px" /><span class="lbl">Negativ / weiß</span></div>
+  </div>
+</body>
+</html>

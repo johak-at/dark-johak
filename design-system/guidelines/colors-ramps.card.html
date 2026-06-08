@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Tint & shade scales" subtitle="Each primary expanded into a usable ramp" -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--color-surface); font-family: var(--font-body); }
+  .wrap { padding: var(--space-5); display: grid; gap: 8px; }
+  .ramp { display: flex; align-items: center; gap: 10px; }
+  .tag { width: 56px; font-size: 11px; font-weight: 600; color: var(--text-muted); }
+  .row { display: flex; flex: 1; border-radius: var(--radius-sm); overflow: hidden; }
+  .c { flex: 1; height: 22px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="ramp"><span class="tag">Sky</span><div class="row"><div class="c" style="background:var(--sky-100)"></div><div class="c" style="background:var(--sky-200)"></div><div class="c" style="background:var(--sky-300)"></div><div class="c" style="background:var(--sky-400)"></div><div class="c" style="background:var(--sky-500)"></div><div class="c" style="background:var(--sky-600)"></div></div></div>
+    <div class="ramp"><span class="tag">Petrol</span><div class="row"><div class="c" style="background:var(--petrol-100)"></div><div class="c" style="background:var(--petrol-200)"></div><div class="c" style="background:var(--petrol-300)"></div><div class="c" style="background:var(--petrol-400)"></div><div class="c" style="background:var(--petrol-500)"></div><div class="c" style="background:var(--petrol-600)"></div></div></div>
+    <div class="ramp"><span class="tag">Red</span><div class="row"><div class="c" style="background:var(--red-100)"></div><div class="c" style="background:var(--red-200)"></div><div class="c" style="background:var(--red-300)"></div><div class="c" style="background:var(--red-400)"></div><div class="c" style="background:var(--red-500)"></div><div class="c" style="background:var(--red-600)"></div></div></div>
+    <div class="ramp"><span class="tag">Amber</span><div class="row"><div class="c" style="background:var(--amber-100)"></div><div class="c" style="background:var(--amber-200)"></div><div class="c" style="background:var(--amber-300)"></div><div class="c" style="background:var(--amber-400)"></div><div class="c" style="background:var(--amber-500)"></div><div class="c" style="background:var(--amber-600)"></div></div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x170" name="Status colors" subtitle="Brand-aligned success / warning / error / info" -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--color-surface); font-family: var(--font-body); }
+  .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); padding: var(--space-5); }
+  .item { display: grid; gap: 8px; }
+  .solid { height: 40px; border-radius: var(--radius-sm); }
+  .soft { height: 26px; border-radius: var(--radius-sm); display: flex; align-items: center; padding: 0 10px; font-size: 11px; font-weight: 600; }
+  .name { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--text-strong); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="item"><div class="name">Success</div><div class="solid" style="background:var(--color-success)"></div><div class="soft" style="background:var(--color-success-soft); color:var(--color-success)">soft bg</div></div>
+    <div class="item"><div class="name">Warning</div><div class="solid" style="background:var(--color-warning)"></div><div class="soft" style="background:var(--color-warning-soft); color:var(--amber-600)">soft bg</div></div>
+    <div class="item"><div class="name">Error</div><div class="solid" style="background:var(--color-error)"></div><div class="soft" style="background:var(--color-error-soft); color:var(--red-500)">soft bg</div></div>
+    <div class="item"><div class="name">Info</div><div class="solid" style="background:var(--color-info)"></div><div class="soft" style="background:var(--color-info-soft); color:var(--color-info)">soft bg</div></div>
+  </div>
+</body>
+</html>

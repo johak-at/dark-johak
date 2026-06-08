@@ -1,0 +1,102 @@
+/* ============================================================
+   JO.HAK — BASE ELEMENT STYLES & HELPERS
+   Light reset + sensible defaults bound to the tokens.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-body);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Headings: Coco Gothic ---- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  line-height: var(--leading-snug);
+  margin: 0 0 0.5em;
+  font-weight: var(--fw-bold);
+}
+h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); }
+h2 { font-size: var(--text-2xl); line-height: var(--leading-tight); }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
+h5 { font-size: var(--text-md); }
+h6 { font-size: var(--text-base); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { color: var(--color-primary-hover); text-decoration: underline; }
+
+small { font-size: var(--text-sm); }
+strong, b { font-weight: var(--fw-bold); }
+
+hr {
+  border: none;
+  border-top: var(--border-width) solid var(--border);
+  margin: var(--space-6) 0;
+}
+
+code, pre, kbd { font-family: var(--font-mono); font-size: 0.9em; }
+
+::selection { background: var(--sky-200); color: var(--johak-ink); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-xs);
+}
+
+/* ============================================================
+   UTILITY / TEXT-ROLE HELPERS
+   ============================================================ */
+
+.johak-eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.johak-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-strong);
+}
+
+.johak-claim {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--johak-navy);
+  font-size: var(--text-2xl);
+  line-height: 1;
+}
+
+/* The four-colour signet bar — a recurring brand motif */
+.johak-accent-bar {
+  display: inline-block;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    90deg,
+    var(--johak-petrol) 0% 25%,
+    var(--johak-sky)    25% 50%,
+    var(--johak-red)    50% 75%,
+    var(--johak-amber)  75% 100%
+  );
+}

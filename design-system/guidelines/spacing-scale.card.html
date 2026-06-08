@@ -1,0 +1,27 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Spacing scale" subtitle="4px base grid · space-1 → space-12" -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--color-surface); font-family: var(--font-body); }
+  .wrap { padding: var(--space-5) var(--space-6); display: grid; gap: 7px; }
+  .row { display: flex; align-items: center; gap: 14px; }
+  .tag { width: 96px; font-size: 11px; color: var(--text-muted); flex: none; }
+  .bar { height: 14px; background: var(--color-primary); border-radius: 3px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="row"><span class="tag">1 · 4px</span><div class="bar" style="width:var(--space-1)"></div></div>
+    <div class="row"><span class="tag">2 · 8px</span><div class="bar" style="width:var(--space-2)"></div></div>
+    <div class="row"><span class="tag">3 · 12px</span><div class="bar" style="width:var(--space-3)"></div></div>
+    <div class="row"><span class="tag">4 · 16px</span><div class="bar" style="width:var(--space-4)"></div></div>
+    <div class="row"><span class="tag">5 · 24px</span><div class="bar" style="width:var(--space-5)"></div></div>
+    <div class="row"><span class="tag">6 · 32px</span><div class="bar" style="width:var(--space-6)"></div></div>
+    <div class="row"><span class="tag">8 · 48px</span><div class="bar" style="width:var(--space-8)"></div></div>
+    <div class="row"><span class="tag">10 · 80px</span><div class="bar" style="width:var(--space-10)"></div></div>
+  </div>
+</body>
+</html>
