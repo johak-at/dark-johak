@@ -7,7 +7,7 @@ export interface TabItem {
 }
 
 /**
- * Underline tab switcher (Coco Gothic labels, petrol active indicator).
+ * Underline tab switcher (display-font (Akzidenz-Grotesk) labels, petrol active indicator).
  * Controlled via `value`/`onChange` or uncontrolled (defaults to first item).
  */
 export interface TabsProps {

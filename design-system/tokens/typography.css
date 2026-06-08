@@ -1,15 +1,17 @@
 /* ============================================================
    JO.HAK — TYPOGRAPHY TOKENS
-   Headline:  Coco Gothic  (geometric, friendly, art-deco edge)
+   Headline:  Akzidenz-Grotesk BQ (neutral grotesque, standard cuts)
    Body/UI:   Open Sans (humanist grotesque — readable, matches johak.at)
+   Logo only: Coco Gothic (geometric — logo & brand artifacts, not headings)
    Claim:     Antro Vectra (signature script — accents only)
    ============================================================ */
 
 :root {
   /* ---- Families ---- */
-  --font-display: "Coco Gothic", "Jost", system-ui, sans-serif;
+  --font-display: "Akzidenz-Grotesk", "Helvetica Neue", Arial, system-ui, sans-serif;
   --font-body:    "Open Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
   --font-script:  "Antro Vectra", "Snell Roundhand", cursive;
+  --font-logo:    "Coco Gothic", "Jost", system-ui, sans-serif; /* logo & brand artifacts only — not for headings */
   --font-mono:    ui-monospace, "SFMono-Regular", "Menlo", monospace;
 
   /* ---- Weights ---- */

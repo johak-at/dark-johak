@@ -11,7 +11,7 @@ export type ButtonVariant =
 export type ButtonSize = "sm" | "md" | "lg";
 
 /**
- * Primary action control for JO.HAK interfaces. Pill-shaped, Coco Gothic label.
+ * Primary action control for JO.HAK interfaces. Pill-shaped, display-font (Akzidenz-Grotesk) label.
  * Use `primary` (petrol) for the main action, `accent` (red) sparingly for
  * high-emphasis CTAs, `secondary`/`ghost` for supporting actions.
  *

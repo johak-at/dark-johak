@@ -10,7 +10,7 @@ The school positions itself as *„die erste Adresse für Wirtschaftskompetenz�
 
 - **`uploads/200923_CI-Guidelines_HAK.pdf`** — official Corporate Identity Guidelines (Sept 2020). Primary source for colours, typography, logo usage, claim, and brand personality. Authored by *gipfelgold.com* (DESIGN, St. Johann im Pongau).
 - **Logos** — supplied SVG/PNG/JPG lockups (horizontal, vertical, signet, with/without claim, RGB + reversed-white). Copied into `assets/logos/`.
-- **Fonts** — Coco Gothic (headline, trial TTFs supplied), Open Sans (body/UI, self-hosted woff2) and Antro Vectra (claim script, OTFs supplied). All self-hosted in `assets/fonts/`. *(The CI's Akzidenz-Grotesk BQ is supplied in `assets/fonts/Akzidenz-Grotesk/` but is condensed and too narrow for screen body copy; johak.at uses Open Sans, which we follow.)*
+- **Fonts** — Akzidenz-Grotesk BQ (headings, OTFs supplied), Open Sans (body/UI, self-hosted woff2), Antro Vectra (claim script, OTFs supplied) and Coco Gothic (logo & brand artifacts only, trial TTFs supplied). All self-hosted in `assets/fonts/`. *(Headings use Akzidenz-Grotesk's standard cuts; its condensed cuts — too narrow for screen body — are unused. Body follows johak.at's Open Sans.)*
 - **Live website** — <https://www.johak.at/> — referenced for the website UI kit's information architecture and real content (programs, news, navigation).
 - Social: [Facebook](https://www.facebook.com/haksanktjohann/) · [Instagram](https://www.instagram.com/johak.pongau/) · [YouTube](https://www.youtube.com/channel/UCqGulRXcMRgynfSrCcYGcFw) · WebUntis (student portal).
 
@@ -55,9 +55,10 @@ The school positions itself as *„die erste Adresse für Wirtschaftskompetenz�
 The four primaries appear together as the **signet** (the nested rounded-square "h" mark) and as the recurring **four-colour accent bar** (`.johak-accent-bar`). Neutrals are cool, pulled toward the night blue. Imagery is warm, candid, real — students, classrooms, events — never stocky or cold.
 
 **Type.**
-- **Coco Gothic** — headline/display. Geometric, Art-Deco-flavoured, friendly. Weights 200/300/400/700/900. Used for all headings, buttons, nav, stats.
-- **Open Sans** — body & UI. Humanist grotesque, highly legible at text sizes, warm and neutral — the face used on johak.at. Self-hosted variable woff2 (weight 400–700, normal + italic). Falls back to Helvetica/Arial. *(Chosen over the CI's Akzidenz-Grotesk BQ Light Condensed, whose condensed cuts read poorly as screen body.)*
-- **Antro Vectra** — the claim script. Flowing signature calligraphy. Decorative accents only (the logo's claim is already vectorised). Never for body copy.
+- **Akzidenz-Grotesk BQ** — headline/display (`--font-display`). Neutral, confident grotesque; standard cuts Regular/Medium/Bold/Super (300–900). Used for all headings, buttons, nav, stats — typically ALL-CAPS with tight tracking for punch.
+- **Open Sans** — body & UI (`--font-body`). Humanist grotesque, highly legible at text sizes, warm and neutral — the face used on johak.at. Self-hosted variable woff2 (weight 400–700, normal + italic). Falls back to Helvetica/Arial. *(Chosen over the CI's Akzidenz-Grotesk BQ Light Condensed, whose condensed cuts read poorly as screen body.)*
+- **Antro Vectra** — the claim script (`--font-script`). Flowing signature calligraphy. Decorative accents only (the logo's claim is already vectorised). Never for body copy.
+- **Coco Gothic** — logo & brand artifacts only (`--font-logo`). Geometric, Art-Deco-flavoured. **Not** used for headings or UI — reserved for the wordmark and specific brand pieces.
 
 **Spacing & shape.** 4px base grid. Corners are softly, confidently rounded (`--radius-lg` 18px for cards, pill for buttons/badges) — echoing the rounded squares of the signet. Buttons are fully pill-shaped.
 
@@ -89,9 +90,9 @@ The CI does not ship a bespoke icon font. Approach:
 - `styles.css` — the single entry point consumers link. `@import`s everything below.
 - `readme.md` — this guide. · `SKILL.md` — Agent-Skills wrapper.
 
-**`tokens/`** — `fonts.css` (self-hosted @font-face for all three families), `colors.css`, `typography.css`, `spacing.css` (radii/shadows/motion/layout), `base.css` (element defaults + `.johak-eyebrow`, `.johak-display`, `.johak-claim`, `.johak-accent-bar`).
+**`tokens/`** — `fonts.css` (self-hosted @font-face for all four families), `colors.css`, `typography.css`, `spacing.css` (radii/shadows/motion/layout), `base.css` (element defaults + `.johak-eyebrow`, `.johak-display`, `.johak-claim`, `.johak-accent-bar`).
 
-**`assets/`** — `logos/` (horizontal, vertical, signet, claim & reversed-white variants in SVG/PNG) · `fonts/` (Coco Gothic, Open Sans, Antro Vectra; Akzidenz-Grotesk BQ also supplied but unused).
+**`assets/`** — `logos/` (horizontal, vertical, signet, claim & reversed-white variants in SVG/PNG) · `fonts/` (Akzidenz-Grotesk BQ, Open Sans, Antro Vectra, Coco Gothic).
 
 **`guidelines/`** — foundation specimen cards (Design System tab): Colors (primaries, darks, neutral, ramps, status, gradient), Type (display, body, script, scale), Spacing (scale, radii, shadows), Brand (logo, signet).
 

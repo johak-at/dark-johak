@@ -39,8 +39,8 @@
         "message": "Raw px value — use a design-system spacing token via var()."
       },
       {
-        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Coco Gothic|Open Sans|Antro Vectra))/i]",
-        "message": "Font not provided by the design system. Available: Coco Gothic, Open Sans, Antro Vectra."
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Akzidenz-Grotesk|Open Sans|Antro Vectra|Coco Gothic))/i]",
+        "message": "Font not provided by the design system. Available: Akzidenz-Grotesk (headings), Open Sans (body), Antro Vectra (claim), Coco Gothic (logo/artifacts)."
       },
       {
         "selector": "JSXOpeningElement[name.name='Alert'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|title|tone|icon|onClose|style|key|ref|className|style|children)$/]",
@@ -492,6 +492,7 @@
       "--container-xl": "spacing"
     },
     "fontFamilies": [
+      "Akzidenz-Grotesk",
       "Antro Vectra",
       "Coco Gothic",
       "Open Sans"

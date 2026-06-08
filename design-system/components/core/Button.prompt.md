@@ -1,4 +1,4 @@
-**Button** — the primary pill-shaped action control for JO.HAK; Coco Gothic label, four-colour brand variants.
+**Button** — the primary pill-shaped action control for JO.HAK; display-font (Akzidenz-Grotesk) label, four-colour brand variants.
 
 ```jsx
 <Button variant="primary" size="md" onClick={save}>Jetzt anmelden</Button>

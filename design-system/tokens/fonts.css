@@ -1,11 +1,11 @@
 /* ============================================================
    JO.HAK — WEBFONTS
    ------------------------------------------------------------
-   Coco Gothic (Headline)  — self-hosted, supplied trial files.
-   Open Sans (Body / UI)   — self-hosted variable woff2 (matches johak.at).
-   Antro Vectra (Claim)    — self-hosted, supplied .otf files.
-     (The CI's Akzidenz-Grotesk BQ is supplied but unused — its
-      condensed cuts read poorly as screen body copy.)
+   Akzidenz-Grotesk BQ (Headings) — self-hosted, supplied .otf (standard cuts).
+   Open Sans (Body / UI)          — self-hosted variable woff2 (matches johak.at).
+   Antro Vectra (Claim)           — self-hosted, supplied .otf files.
+   Coco Gothic (Logo / artifacts) — self-hosted trial TTFs; no longer the
+     heading face — reserved for the logo and specific brand artifacts.
    ============================================================ */
 
 /* ---- Coco Gothic (Headline / Display) ---------------------- */
@@ -57,6 +57,45 @@
   font-style: normal;
   font-display: swap;
   src: url("../assets/fonts/CocoGothic-Heavy.ttf") format("truetype");
+}
+
+/* ---- Akzidenz-Grotesk BQ (Headings / Display) -------------
+   Standard cuts. The neutral grotesque now carries all headings;
+   Coco Gothic is reserved for the logo and brand artifacts. */
+@font-face {
+  font-family: "Akzidenz-Grotesk";
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Akzidenz-Grotesk/AkzidenzGrotesk-Light.otf") format("opentype");
+}
+@font-face {
+  font-family: "Akzidenz-Grotesk";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Akzidenz-Grotesk/AkzidenzGrotesk-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "Akzidenz-Grotesk";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Akzidenz-Grotesk/AkzidenzGrotesk-Medium.otf") format("opentype");
+}
+@font-face {
+  font-family: "Akzidenz-Grotesk";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Akzidenz-Grotesk/AkzidenzGrotesk-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Akzidenz-Grotesk";
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Akzidenz-Grotesk/AkzidenzGrotesk-Super.otf") format("opentype");
 }
 
 /* ---- Antro Vectra (Claim / signature script) -------------- */
