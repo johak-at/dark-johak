@@ -1,4 +1,10 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
+
+const dev = process.argv.includes('dev');
+
+// Project pages are served from https://<user>.github.io/<repo>/, so the app
+// needs a base path in production. Overridable via BASE_PATH for forks/domains.
+const base = dev ? '' : (process.env.BASE_PATH ?? '/dark-johak');
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -7,10 +13,17 @@ const config = {
 		runes: ({ filename }) => (filename.split(/[/\\]/).includes('node_modules') ? undefined : true)
 	},
 	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter()
+		// Fully static, client-side-only output for GitHub Pages.
+		adapter: adapter({
+			pages: 'build',
+			assets: 'build',
+			fallback: '404.html',
+			precompress: false,
+			strict: true
+		}),
+		paths: {
+			base
+		}
 	}
 };
 

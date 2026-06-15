@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { base } from '$app/paths';
+
   const routes = [
     { href: '/overloading', number: '01', tag: 'Überwältigung', title: 'OVER\u00ADLOADING', teaser: 'Zu viele Optionen auf einmal – bis du aufgibst und einfach auf „Weiter" klickst.', color: 'sky' },
     { href: '/trickquestions', number: '02', tag: 'Fangfragen', title: 'TRICK QUESTIONS', teaser: 'Doppelverneinungen im Kleingedruckten: ein Häkchen, das genau das Gegenteil bedeutet.', color: 'amber' },
@@ -57,7 +59,7 @@
     <div class="grid-inner">
       <div class="cards" lang="en">
         {#each routes as route (route.href)}
-          <a href={route.href} class="card" data-color={route.color}>
+          <a href={base + route.href} class="card" data-color={route.color}>
             <div class="card__number">{route.number}</div>
             <div class="card__content">
               <span class="card__tag">{route.tag}</span>
