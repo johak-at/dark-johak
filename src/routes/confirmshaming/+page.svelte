@@ -101,8 +101,10 @@
 						<button
 							class="btn btn--shame"
 							onclick={() => advance(current.shameNext, true)}
+							aria-label="Ablehnen (Confirmshaming-Beispiel)"
 						>
-							{current.shame}
+							<span class="btn__shame-label">{current.shame}</span>
+							<span class="btn__shame-badge">Confirmshaming</span>
 						</button>
 					</div>
 				</div>
@@ -320,28 +322,52 @@
 		box-shadow: var(--shadow-focus);
 	}
 
-	/* Confirmshaming button — looks like a plain link/secondary action, guilt text in bold red */
+	/* Confirmshaming button — deliberately small/grey but with red annotation */
 	.btn--shame {
 		background: transparent;
-		border: none;
-		color: var(--color-accent);
+		border: 1px solid var(--border);
+		color: var(--text-muted);
 		font-family: var(--font-body);
 		font-size: var(--text-sm);
-		font-weight: var(--fw-bold);
-		font-style: italic;
+		font-weight: var(--fw-regular);
 		letter-spacing: var(--tracking-normal);
 		text-transform: none;
-		padding: var(--space-2) var(--space-3);
+		padding: var(--space-2) var(--space-4);
 		border-radius: var(--radius-pill);
+		position: relative;
+		flex-direction: column;
+		gap: var(--space-1);
+		outline: 2px dashed var(--color-accent);
+		outline-offset: 2px;
 	}
 
 	.btn--shame:hover {
-		text-decoration: underline;
+		background-color: var(--color-error-soft);
+		border-color: var(--color-accent);
+		color: var(--color-accent);
 	}
 
 	.btn--shame:focus-visible {
 		outline: none;
 		box-shadow: var(--shadow-focus);
+	}
+
+	.btn__shame-label {
+		font-style: italic;
+	}
+
+	.btn__shame-badge {
+		display: inline-block;
+		font-family: var(--font-body);
+		font-size: var(--text-xs);
+		font-weight: var(--fw-semibold);
+		letter-spacing: var(--tracking-wider);
+		text-transform: uppercase;
+		color: var(--color-accent);
+		background-color: var(--color-accent-soft);
+		border-radius: var(--radius-pill);
+		padding: 2px var(--space-2);
+		font-style: normal;
 	}
 
 	/* ── Result box ── */
