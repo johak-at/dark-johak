@@ -1,5 +1,6 @@
 <script>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     console.log("Hello 2BHK!")
 </script>
 
@@ -11,6 +12,8 @@
     }
 </style>
 =======
+=======
+>>>>>>> Stashed changes
 	console.log('hello');
 </script>
 
@@ -21,4 +24,7 @@
 		color: red;
 	}
 </style>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
