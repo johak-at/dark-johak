@@ -28,13 +28,13 @@
 <main class="page">
 	{#if stage !== 'education'}
 		<section class="card">
-			<p class="eyebrow">Interactive dark-pattern demo</p>
-			<h1 class="title">Bait-and-switch</h1>
+			<p class="eyebrow">Interaktive Dark-Pattern-Demo</p>
+			<h1 class="title">Köder &amp; Tausch</h1>
 			<p class="intro">
-				Try to cancel your plan. The UI will repeatedly push you to a different action than what the
-				labels suggest.
+				Versuche, deinen Tarif zu kündigen. Die Oberfläche drängt dich immer wieder zu einer anderen
+				Aktion, als die Beschriftungen vermuten lassen.
 			</p>
-			<p class="attempts">Misleading loops triggered: {attempts}</p>
+			<p class="attempts">Ausgelöste Täuschungsschleifen: {attempts}</p>
 
 			{#if loopMessage}
 				<p class="warning">{loopMessage}</p>
@@ -42,109 +42,112 @@
 
 			{#if stage === 'offer'}
 				<div class="block">
-					<h2 class="step-title">Step 1: Confirm your decision</h2>
+					<h2 class="step-title">Schritt 1: Bestätige deine Entscheidung</h2>
 					<p class="copy">
-						We can keep your plan active with a special discount. Many interfaces highlight this
-						option and hide the real next step.
+						Wir können deinen Tarif mit einem Sonderrabatt aktiv halten. Viele Oberflächen heben diese
+						Option hervor und verstecken den eigentlichen nächsten Schritt.
 					</p>
 					<div class="actions">
 						<button
 							class="primary"
 							type="button"
-							onclick={() => pushBack('Discount accepted. Your plan is still active.')}
+							onclick={() => pushBack('Rabatt angenommen. Dein Tarif ist weiterhin aktiv.')}
 						>
-							Keep discounted plan
+							Rabatt-Tarif behalten
 						</button>
 						<button
 							class="secondary"
 							type="button"
-							onclick={() => pushBack('Great choice! We saved your membership again.')}
+							onclick={() => pushBack('Gute Wahl! Wir haben deine Mitgliedschaft erneut gesichert.')}
 						>
-							Secure my account
+							Mein Konto sichern
 						</button>
 					</div>
 					<button class="deceptive-link" type="button" onclick={moveToSurvey}>
-						Continue to cancellation
+						Weiter zur Kündigung
 					</button>
 				</div>
 			{:else if stage === 'survey'}
 				<div class="block">
-					<h2 class="step-title">Step 2: One quick question</h2>
-					<p class="copy">Pick the option that truly continues cancellation.</p>
+					<h2 class="step-title">Schritt 2: Eine kurze Frage</h2>
+					<p class="copy">Wähle die Option, die die Kündigung tatsächlich fortsetzt.</p>
 					<div class="actions">
 						<button
 							class="primary"
 							type="button"
 							onclick={() =>
-								pushBack('Thanks! We have optimized your plan instead of canceling it.')}
+								pushBack('Danke! Wir haben deinen Tarif optimiert, statt ihn zu kündigen.')}
 						>
-							Submit and continue
+							Absenden und fortfahren
 						</button>
 						<button
 							class="secondary"
 							type="button"
-							onclick={() => pushBack('Your answers helped us keep your benefits active.')}
+							onclick={() => pushBack('Deine Antworten haben uns geholfen, deine Vorteile aktiv zu halten.')}
 						>
-							Finish review
+							Überprüfung abschließen
 						</button>
 					</div>
 					<button class="deceptive-link" type="button" onclick={moveToFinal}
-						>No thanks, next step</button
+						>Nein danke, nächster Schritt</button
 					>
 				</div>
 			{:else if stage === 'final'}
 				<div class="block">
-					<h2 class="step-title">Step 3: Final confirmation</h2>
-					<p class="copy">One action still switches your intent. Find the real exit.</p>
+					<h2 class="step-title">Schritt 3: Letzte Bestätigung</h2>
+					<p class="copy">Eine Aktion verdreht deine Absicht noch immer. Finde den echten Ausgang.</p>
 					<div class="actions">
 						<button
 							class="primary"
 							type="button"
 							onclick={() =>
-								pushBack('Done! We protected your account by keeping the subscription.')}
+								pushBack('Fertig! Wir haben dein Konto geschützt, indem wir das Abo behalten haben.')}
 						>
-							Finish cancellation
+							Kündigung abschließen
 						</button>
 						<button
 							class="secondary"
 							type="button"
-							onclick={() => pushBack('You are all set with your current package.')}
+							onclick={() => pushBack('Mit deinem aktuellen Paket ist alles bestens.')}
 						>
-							Confirm update
+							Aktualisierung bestätigen
 						</button>
 					</div>
 					<button class="deceptive-link" type="button" onclick={completeDemo}
-						>Actually cancel and continue</button
+						>Wirklich kündigen und fortfahren</button
 					>
 				</div>
 			{/if}
 		</section>
 	{:else}
 		<section class="card education">
-			<p class="eyebrow">Educational breakdown</p>
-			<h1 class="title">How bait-and-switch works</h1>
+			<p class="eyebrow">Lern-Analyse</p>
+			<h1 class="title">So funktioniert Köder &amp; Tausch</h1>
 			<p class="copy">
-				This pattern attracts you with one clear intention (canceling), then redirects you to a
-				different outcome (keeping or upgrading) through misleading labels, visual hierarchy, and
-				repeated loops.
+				Dieses Muster lockt dich mit einer klaren Absicht (Kündigen) und leitet dich dann durch
+				irreführende Beschriftungen, visuelle Hierarchie und wiederholte Schleifen zu einem anderen
+				Ergebnis (Behalten oder Upgraden) um.
 			</p>
 
-			<h2 class="step-title">What happened in the demo</h2>
+			<h2 class="step-title">Was in der Demo passiert ist</h2>
 			<ul class="list">
-				<li>Primary actions looked safe but switched your intent.</li>
-				<li>The real cancellation path was downgraded to tiny link-style controls.</li>
-				<li>Each step reset you to the beginning to increase fatigue and accidental acceptance.</li>
+				<li>Primäre Aktionen wirkten sicher, verdrehten aber deine Absicht.</li>
+				<li>Der echte Kündigungsweg wurde zu winzigen, link-artigen Bedienelementen herabgestuft.</li>
+				<li>
+					Jeder Schritt setzte dich an den Anfang zurück, um Ermüdung und versehentliche Zustimmung zu
+					steigern.
+				</li>
 			</ul>
 
-			<h2 class="step-title">How to protect users</h2>
+			<h2 class="step-title">So schützt man Nutzer:innen</h2>
 			<ul class="list">
-				<li>Label actions with exact outcomes and keep semantics consistent.</li>
-				<li>Give equal visual weight to all valid decisions.</li>
-				<li>Avoid forced loops, hidden exits, and ambiguous confirmation text.</li>
+				<li>Aktionen mit exakten Ergebnissen beschriften und die Bedeutung konsistent halten.</li>
+				<li>Allen gültigen Entscheidungen gleiches visuelles Gewicht geben.</li>
+				<li>Erzwungene Schleifen, versteckte Ausgänge und mehrdeutige Bestätigungstexte vermeiden.</li>
 			</ul>
 
 			<button class="primary" type="button" onclick={() => (stage = 'offer')}>
-				Restart demo
+				Demo neu starten
 			</button>
 		</section>
 	{/if}
