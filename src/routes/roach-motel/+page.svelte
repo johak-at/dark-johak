@@ -9,60 +9,50 @@
 		| 'pending'
 		| 'explanation';
 
+	type ModalKey =
+		| 'startseite' | 'kurse' | 'events'
+		| 'profil' | 'bestellhistorie' | 'benachrichtigungen' | 'datenschutz'
+		| 'plan-upgrade' | 'zahlung' | 'rechnung'
+		| null;
+
 	let phase = $state<Phase>('offer');
 	let navOpen = $state(false);
-	let findStep = $state(0); // 0=dashboard, 1=settings tabs, 2=subscription tab
+	let findStep = $state(0);
 	let surveyReason = $state('');
 	let surveyFeedback = $state('');
 	let surveyNPS = $state<number | null>(null);
-	let surveyContact = $state('yes'); // defaults to yes — roach motel trick
+	let surveyContact = $state('yes');
+	let modal = $state<ModalKey>(null);
+	let ursulaDismissed = $state(false);
+	let ursulaVisible = $state(false);
 
 	const canSubmitSurvey = $derived(
 		surveyReason !== '' && surveyFeedback.trim().length >= 10 && surveyNPS !== null
 	);
 
-	function subscribe() {
-		phase = 'subscribed';
-	}
+	// Show Ursula popup 3s after entering the subscribed phase
+	$effect(() => {
+		if (phase === 'subscribed' || phase === 'find-cancel') {
+			ursulaDismissed = false;
+			const t = setTimeout(() => { ursulaVisible = true; }, 3000);
+			return () => clearTimeout(t);
+		} else {
+			ursulaVisible = false;
+		}
+	});
 
-	function goToFindCancel() {
-		phase = 'find-cancel';
-		findStep = 0;
-		navOpen = false;
-	}
-
-	function advanceFind(step: number) {
-		findStep = step;
-	}
-
-	function goToRetention1() {
-		phase = 'retention1';
-	}
-
-	function goToRetention2() {
-		phase = 'retention2';
-	}
-
-	function goToSurvey() {
-		phase = 'survey';
-	}
-
-	function submitSurvey() {
-		if (canSubmitSurvey) phase = 'pending';
-	}
-
-	function showExplanation() {
-		phase = 'explanation';
-	}
-
+	function subscribe() { phase = 'subscribed'; }
+	function goToFindCancel() { phase = 'find-cancel'; findStep = 0; navOpen = false; }
+	function advanceFind(step: number) { findStep = step; navOpen = false; }
+	function goToRetention1() { phase = 'retention1'; }
+	function goToRetention2() { phase = 'retention2'; }
+	function goToSurvey() { phase = 'survey'; }
+	function submitSurvey() { if (canSubmitSurvey) phase = 'pending'; }
+	function showExplanation() { phase = 'explanation'; }
 	function restart() {
-		phase = 'offer';
-		navOpen = false;
-		findStep = 0;
-		surveyReason = '';
-		surveyFeedback = '';
-		surveyNPS = null;
-		surveyContact = 'yes';
+		phase = 'offer'; navOpen = false; findStep = 0;
+		surveyReason = ''; surveyFeedback = ''; surveyNPS = null; surveyContact = 'yes';
+		modal = null; ursulaVisible = false;
 	}
 </script>
 
@@ -115,7 +105,6 @@
 				*Kündigung per Telefon Mo–Fr 9:00–11:30 Uhr oder per Einschreiben möglich.
 			</p>
 		</div>
-		<p class="annotation">⬆ Einmaiger Klick – keine Bestätigung, sofortige Abbuchung nach 30 Tagen.</p>
 		{/if}
 
 		<!-- ══════════════════════════════════════
@@ -138,7 +127,6 @@
 				</p>
 			</div>
 		</div>
-		<p class="annotation">⬆ Kündigen? Klingt einfach – versuche es.</p>
 		{/if}
 
 		<!-- ══════════════════════════════════════
@@ -151,9 +139,9 @@
 			<div class="fake-header">
 				<span class="fake-logo">JO.HAK</span>
 				<nav class="fake-nav">
-					<span class="fake-nav-item">Startseite</span>
-					<span class="fake-nav-item">Kurse</span>
-					<span class="fake-nav-item">Events</span>
+					<button class="fake-nav-item" onclick={() => modal = 'startseite'}>Startseite</button>
+					<button class="fake-nav-item" onclick={() => modal = 'kurse'}>Kurse</button>
+					<button class="fake-nav-item" onclick={() => modal = 'events'}>Events</button>
 					<div class="fake-nav-dropdown-wrap">
 						<button
 							class="fake-nav-item fake-nav-item--account"
@@ -163,10 +151,10 @@
 						</button>
 						{#if navOpen}
 						<div class="fake-dropdown">
-							<span class="fake-dd-item">Mein Profil</span>
-							<span class="fake-dd-item">Bestellhistorie</span>
-							<span class="fake-dd-item">Benachrichtigungen</span>
-							<span class="fake-dd-item">Datenschutz</span>
+							<button class="fake-dd-item" onclick={() => modal = 'profil'}>Mein Profil</button>
+							<button class="fake-dd-item" onclick={() => modal = 'bestellhistorie'}>Bestellhistorie</button>
+							<button class="fake-dd-item" onclick={() => modal = 'benachrichtigungen'}>Benachrichtigungen</button>
+							<button class="fake-dd-item" onclick={() => modal = 'datenschutz'}>Datenschutz</button>
 							<button class="fake-dd-item fake-dd-item--cta" onclick={() => advanceFind(1)}>
 								Kontoeinstellungen →
 							</button>
@@ -186,7 +174,6 @@
 					<div class="fake-widget">🎟 2 Events diese Woche</div>
 					<div class="fake-widget">💬 5 neue Nachrichten</div>
 				</div>
-				<p class="find-hint">👆 Klicke auf <strong>„Mein Konto"</strong> oben rechts, um die Einstellungen zu finden.</p>
 			</div>
 			{/if}
 
@@ -209,7 +196,6 @@
 					<p class="fake-body-text">Vorname: Max &nbsp;|&nbsp; Nachname: Mustermann</p>
 					<p class="fake-body-text">E-Mail: max@example.com</p>
 				</div>
-				<p class="find-hint">👆 Suche den richtigen Tab – es ist nicht der erste.</p>
 			</div>
 			{/if}
 
@@ -225,16 +211,15 @@
 				<p class="fake-body-text">Nächste Abbuchung: 15. Juli 2026</p>
 				<p class="fake-body-text">Zahlungsmethode: •••• 4242</p>
 				<div class="fake-actions-row">
-					<button class="fake-action-btn">Plan upgraden</button>
-					<button class="fake-action-btn">Zahlungsmethode ändern</button>
-					<button class="fake-action-btn">Rechnung herunterladen</button>
+					<button class="fake-action-btn" onclick={() => modal = 'plan-upgrade'}>Plan upgraden</button>
+					<button class="fake-action-btn" onclick={() => modal = 'zahlung'}>Zahlungsmethode ändern</button>
+					<button class="fake-action-btn" onclick={() => modal = 'rechnung'}>Rechnung herunterladen</button>
 				</div>
 				<div class="cancel-link-wrap">
 					<button class="cancel-link" onclick={goToRetention1}>
 						Mitgliedschaft beenden
 					</button>
 				</div>
-				<p class="find-hint">⬆ Der Kündigungslink ist ganz unten, klein und unauffällig.</p>
 			</div>
 			{/if}
 		</div>
@@ -264,7 +249,6 @@
 				</button>
 			</div>
 		</div>
-		<p class="annotation">⬆ Der „Bleiben"-Button ist groß & primär. „Weiter kündigen" ist kaum sichtbar.</p>
 		{/if}
 
 		<!-- ══════════════════════════════════════
@@ -291,7 +275,6 @@
 				</button>
 			</div>
 		</div>
-		<p class="annotation">⬆ Gefälschter Countdown, emotionaler Druck. Kündigen bleibt versteckt.</p>
 		{/if}
 
 		<!-- ══════════════════════════════════════
@@ -357,7 +340,6 @@
 				Kündigung abschicken
 			</button>
 		</div>
-		<p class="annotation">⬆ Pflichtumfrage vor der Kündigung. „Kontakt"-Feld ist standardmäßig auf „Ja".</p>
 		{/if}
 
 		<!-- ══════════════════════════════════════
@@ -382,7 +364,6 @@
 				Erklärung anzeigen →
 			</button>
 		</div>
-		<p class="annotation">⬆ Telefonische Bestätigung zu eingeschränkten Zeiten = viele geben hier auf.</p>
 		{/if}
 
 		<!-- ══════════════════════════════════════
@@ -435,8 +416,179 @@
 		</div>
 		{/if}
 
+		<!-- Ursula popup -->
+		{#if ursulaVisible && !ursulaDismissed}
+		<div class="ursula-popup">
+			<div class="ursula-avatar">U</div>
+			<div class="ursula-text">
+				<strong>Ursula</strong> ist nur 2 km von dir entfernt
+				<span class="ursula-sub">und ist gerade online</span>
+			</div>
+			<button class="ursula-close" onclick={() => ursulaDismissed = true}>✕</button>
+		</div>
+		{/if}
+
 	</main>
 </div>
+
+<!-- ===== MODAL OVERLAY ===== -->
+{#if modal !== null}
+<div
+	class="modal-backdrop"
+	onclick={() => modal = null}
+	onkeydown={(e) => e.key === 'Escape' && (modal = null)}
+	role="presentation"
+	tabindex="-1"
+>
+	<div
+		class="modal-box"
+		onclick={(e) => e.stopPropagation()}
+		onkeydown={(e) => e.stopPropagation()}
+		role="dialog"
+		tabindex="0"
+	>
+		<button class="modal-close" onclick={() => modal = null}>✕</button>
+
+		{#if modal === 'startseite'}
+		<h2 class="modal-title">Startseite</h2>
+		<p class="modal-lead">Willkommen auf der JO.HAK Startseite.</p>
+		<div class="modal-tiles">
+			<div class="modal-tile">📰 Aktuelle Neuigkeiten</div>
+			<div class="modal-tile">🏆 Beste Absolventen 2025</div>
+			<div class="modal-tile">📅 Nächste Veranstaltungen</div>
+		</div>
+		<p class="modal-body">Die JO.HAK St. Johann bietet dir mit BUSINESS plus.HAK, IT.HAK und PRAXIS.HAS drei zukunftsorientierte Ausbildungswege. Hier findest du alle aktuellen Infos rund um den Schulalltag.</p>
+
+		{:else if modal === 'kurse'}
+		<h2 class="modal-title">Kurse</h2>
+		<p class="modal-lead">Deine Premium-Kurse im Überblick.</p>
+		<ul class="modal-list">
+			<li>🔒 <strong>Excel für Fortgeschrittene</strong> — 4,2 Stunden</li>
+			<li>🔒 <strong>Buchhaltung Grundlagen</strong> — 6,0 Stunden</li>
+			<li>🔒 <strong>Projektmanagement SCRUM</strong> — 3,5 Stunden</li>
+			<li>🔒 <strong>Python für Einsteiger</strong> — 8,1 Stunden</li>
+		</ul>
+		<p class="modal-note">🔒 = nur mit aktivem Premium-Abo zugänglich</p>
+
+		{:else if modal === 'events'}
+		<h2 class="modal-title">Events</h2>
+		<p class="modal-lead">Kommende Veranstaltungen für Premium-Mitglieder.</p>
+		<ul class="modal-list">
+			<li>📍 <strong>20. Jun.</strong> — Schnuppertag BUSINESS plus.HAK</li>
+			<li>📍 <strong>28. Jun.</strong> — Netzwerk-Abend mit Absolventen</li>
+			<li>📍 <strong>5. Jul.</strong> — IT-Workshop: KI im Unterricht</li>
+		</ul>
+		<p class="modal-note">Anmeldung nur für Premium-Mitglieder mit Priorität.</p>
+
+		{:else if modal === 'profil'}
+		<h2 class="modal-title">Mein Profil</h2>
+		<div class="modal-profile-row">
+			<div class="modal-avatar">M</div>
+			<div>
+				<p class="modal-name">Max Mustermann</p>
+				<p class="modal-email">max@example.com</p>
+			</div>
+		</div>
+		<div class="modal-field-list">
+			<div class="modal-field"><span>Vorname</span><span>Max</span></div>
+			<div class="modal-field"><span>Nachname</span><span>Mustermann</span></div>
+			<div class="modal-field"><span>Geburtsdatum</span><span>01.01.2005</span></div>
+			<div class="modal-field"><span>Telefon</span><span>+43 664 123 456</span></div>
+		</div>
+		<button class="modal-btn">Profil bearbeiten</button>
+
+		{:else if modal === 'bestellhistorie'}
+		<h2 class="modal-title">Bestellhistorie</h2>
+		<p class="modal-lead">Deine bisherigen Zahlungen.</p>
+		<table class="modal-table">
+			<thead><tr><th>Datum</th><th>Beschreibung</th><th>Betrag</th></tr></thead>
+			<tbody>
+				<tr><td>15.06.2026</td><td>Premium Club – Juni</td><td>9,99 €</td></tr>
+				<tr><td>15.05.2026</td><td>Premium Club – Mai</td><td>9,99 €</td></tr>
+				<tr><td>15.04.2026</td><td>Premium Club – April</td><td>9,99 €</td></tr>
+			</tbody>
+		</table>
+
+		{:else if modal === 'benachrichtigungen'}
+		<h2 class="modal-title">Benachrichtigungen</h2>
+		<ul class="modal-notif-list">
+			<li class="notif-item notif-unread">🔔 <strong>Neuer Kurs verfügbar:</strong> Python für Einsteiger</li>
+			<li class="notif-item notif-unread">🎟 <strong>Event-Erinnerung:</strong> Schnuppertag morgen</li>
+			<li class="notif-item">📧 Deine Rechnung für Mai wurde erstellt</li>
+			<li class="notif-item">✅ Profil erfolgreich aktualisiert</li>
+		</ul>
+
+		{:else if modal === 'datenschutz'}
+		<h2 class="modal-title">Datenschutz</h2>
+		<p class="modal-body">Hier kannst du einstellen, welche Daten JO.HAK über dich speichert und verwendet.</p>
+		<div class="modal-toggle-list">
+			<div class="modal-toggle-row">
+				<div><strong>Marketing-E-Mails</strong><br/><span class="toggle-desc">Angebote & Neuigkeiten per E-Mail</span></div>
+				<div class="toggle-on">AN</div>
+			</div>
+			<div class="modal-toggle-row">
+				<div><strong>Analyse & Tracking</strong><br/><span class="toggle-desc">Nutzungsverhalten auswerten</span></div>
+				<div class="toggle-on">AN</div>
+			</div>
+			<div class="modal-toggle-row">
+				<div><strong>Drittanbieter-Cookies</strong><br/><span class="toggle-desc">Für personalisierte Werbung</span></div>
+				<div class="toggle-on">AN</div>
+			</div>
+		</div>
+		<p class="modal-note">Alle Einstellungen standardmäßig aktiviert. Zum Deaktivieren bitte schriftliche Anfrage an datenschutz@johak.at senden.</p>
+
+		{:else if modal === 'plan-upgrade'}
+		<h2 class="modal-title">Plan upgraden</h2>
+		<p class="modal-lead">Hol noch mehr aus deiner Mitgliedschaft heraus.</p>
+		<div class="modal-plan-cards">
+			<div class="modal-plan-card modal-plan-current">
+				<div class="plan-label">Aktuell</div>
+				<strong>Premium Club</strong>
+				<div class="plan-price">9,99 €<span>/Mo.</span></div>
+				<ul><li>✓ Lernmaterialien</li><li>✓ Events</li><li>✓ Netzwerk</li></ul>
+			</div>
+			<div class="modal-plan-card modal-plan-pro">
+				<div class="plan-label plan-label--pro">Empfohlen</div>
+				<strong>Premium Club PRO</strong>
+				<div class="plan-price">19,99 €<span>/Mo.</span></div>
+				<ul><li>✓ Alles aus Premium</li><li>✓ 1:1 Karriere-Coaching</li><li>✓ Zertifikate</li></ul>
+				<button class="modal-btn modal-btn--accent">Jetzt upgraden</button>
+			</div>
+		</div>
+
+		{:else if modal === 'zahlung'}
+		<h2 class="modal-title">Zahlungsmethode ändern</h2>
+		<p class="modal-lead">Aktuelle Methode: Kreditkarte •••• 4242</p>
+		<div class="modal-payment-options">
+			<label class="payment-option payment-option--active">
+				<input type="radio" name="pay" checked /> Kreditkarte ···· 4242
+			</label>
+			<label class="payment-option">
+				<input type="radio" name="pay" /> Neue Kreditkarte hinzufügen
+			</label>
+			<label class="payment-option">
+				<input type="radio" name="pay" /> PayPal
+			</label>
+			<label class="payment-option">
+				<input type="radio" name="pay" /> SEPA-Lastschrift
+			</label>
+		</div>
+		<button class="modal-btn">Speichern</button>
+
+		{:else if modal === 'rechnung'}
+		<h2 class="modal-title">Rechnung herunterladen</h2>
+		<p class="modal-lead">Wähle den Abrechnungszeitraum:</p>
+		<ul class="modal-list">
+			<li>📄 Rechnung Juni 2026 <button class="modal-dl-btn">⬇ PDF</button></li>
+			<li>📄 Rechnung Mai 2026 <button class="modal-dl-btn">⬇ PDF</button></li>
+			<li>📄 Rechnung April 2026 <button class="modal-dl-btn">⬇ PDF</button></li>
+		</ul>
+		<p class="modal-note">Rechnungen werden im Format DIN A4 als PDF generiert.</p>
+		{/if}
+
+	</div>
+</div>
+{/if}
 
 <style>
 	/* ── Layout ─────────────────────────────────────── */
@@ -504,6 +656,251 @@
 	.progress-dot.active { background: var(--color-sky); transform: scale(1.3); }
 	.progress-dot.done   { background: var(--petrol-400); }
 
+	/* ── Ursula popup ───────────────────────────────── */
+	.ursula-popup {
+		position: fixed;
+		bottom: var(--space-6);
+		right: var(--space-6);
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		background: var(--color-surface);
+		border: 1.5px solid var(--border-strong);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-xl);
+		padding: var(--space-3) var(--space-4);
+		z-index: 200;
+		max-width: 280px;
+		animation: slide-in var(--duration-slow) var(--ease-out);
+	}
+	@keyframes slide-in {
+		from { transform: translateY(20px); opacity: 0; }
+		to   { transform: translateY(0);    opacity: 1; }
+	}
+	.ursula-avatar {
+		width: 44px; height: 44px;
+		border-radius: var(--radius-pill);
+		background: var(--gradient-signet);
+		color: var(--text-inverse);
+		font-family: var(--font-display);
+		font-size: var(--text-lg);
+		font-weight: var(--fw-bold);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+	.ursula-text {
+		font-size: var(--text-sm);
+		color: var(--text-strong);
+		font-weight: var(--fw-semibold);
+		line-height: var(--leading-snug);
+	}
+	.ursula-sub {
+		display: block;
+		font-size: var(--text-xs);
+		color: var(--color-success);
+		font-weight: var(--fw-regular);
+		margin-top: 2px;
+	}
+	.ursula-close {
+		background: none;
+		border: none;
+		color: var(--text-subtle);
+		font-size: var(--text-sm);
+		cursor: pointer;
+		padding: 0;
+		line-height: 1;
+		align-self: flex-start;
+		flex-shrink: 0;
+	}
+	.ursula-close:hover { color: var(--text-muted); }
+
+	/* ── Modal ───────────────────────────────────────── */
+	.modal-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(16, 33, 41, 0.55);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 300;
+		padding: var(--space-4);
+	}
+	.modal-box {
+		background: var(--color-surface);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-xl);
+		padding: var(--space-7);
+		width: 100%;
+		max-width: 520px;
+		max-height: 85vh;
+		overflow-y: auto;
+		position: relative;
+		animation: modal-in var(--duration-slow) var(--ease-out);
+	}
+	@keyframes modal-in {
+		from { transform: translateY(12px) scale(0.98); opacity: 0; }
+		to   { transform: translateY(0)     scale(1);    opacity: 1; }
+	}
+	.modal-close {
+		position: absolute;
+		top: var(--space-4);
+		right: var(--space-4);
+		background: var(--color-surface-sunken);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-pill);
+		width: 32px; height: 32px;
+		font-size: var(--text-sm);
+		cursor: pointer;
+		color: var(--text-muted);
+		display: flex; align-items: center; justify-content: center;
+	}
+	.modal-close:hover { background: var(--neutral-200); color: var(--text-strong); }
+	.modal-title {
+		font-family: var(--font-display);
+		font-size: var(--text-xl);
+		font-weight: var(--fw-bold);
+		color: var(--text-strong);
+		margin: 0 0 var(--space-4);
+		padding-right: var(--space-8);
+	}
+	.modal-lead {
+		font-size: var(--text-sm);
+		color: var(--text-muted);
+		margin: 0 0 var(--space-5);
+	}
+	.modal-body {
+		font-size: var(--text-base);
+		color: var(--text-body);
+		line-height: var(--leading-relaxed);
+		margin: 0 0 var(--space-4);
+	}
+	.modal-note {
+		font-size: var(--text-xs);
+		color: var(--text-muted);
+		margin-top: var(--space-4);
+	}
+	.modal-tiles {
+		display: flex;
+		gap: var(--space-3);
+		flex-wrap: wrap;
+		margin-bottom: var(--space-5);
+	}
+	.modal-tile {
+		background: var(--color-primary-soft);
+		color: var(--color-primary);
+		padding: var(--space-3) var(--space-4);
+		border-radius: var(--radius-sm);
+		font-size: var(--text-sm);
+		font-weight: var(--fw-semibold);
+	}
+	.modal-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 var(--space-4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+	.modal-list li {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: var(--space-3) var(--space-4);
+		background: var(--color-surface-sunken);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		font-size: var(--text-sm);
+		color: var(--text-body);
+	}
+	.modal-dl-btn {
+		background: var(--color-primary-soft);
+		border: 1px solid var(--petrol-200);
+		color: var(--color-primary);
+		font-size: var(--text-xs);
+		font-weight: var(--fw-semibold);
+		padding: var(--space-1) var(--space-3);
+		border-radius: var(--radius-pill);
+		cursor: pointer;
+	}
+	.modal-dl-btn:hover { background: var(--petrol-200); }
+	.modal-btn {
+		display: inline-block;
+		padding: var(--space-3) var(--space-5);
+		background: var(--color-primary);
+		color: var(--text-inverse);
+		font-family: var(--font-body);
+		font-size: var(--text-sm);
+		font-weight: var(--fw-semibold);
+		border: none;
+		border-radius: var(--radius-pill);
+		cursor: pointer;
+		margin-top: var(--space-5);
+	}
+	.modal-btn:hover { background: var(--color-primary-hover); }
+	.modal-btn--accent { background: var(--color-accent); margin-top: var(--space-3); }
+	.modal-btn--accent:hover { background: var(--color-accent-hover); }
+	/* Profile */
+	.modal-profile-row {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+		margin-bottom: var(--space-5);
+	}
+	.modal-avatar {
+		width: 56px; height: 56px;
+		border-radius: var(--radius-pill);
+		background: var(--gradient-signet);
+		color: var(--text-inverse);
+		font-family: var(--font-display);
+		font-size: var(--text-xl);
+		font-weight: var(--fw-bold);
+		display: flex; align-items: center; justify-content: center;
+		flex-shrink: 0;
+	}
+	.modal-name { font-weight: var(--fw-bold); color: var(--text-strong); margin: 0 0 var(--space-1); }
+	.modal-email { font-size: var(--text-sm); color: var(--text-muted); margin: 0; }
+	.modal-field-list { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-2); }
+	.modal-field {
+		display: flex; justify-content: space-between;
+		padding: var(--space-2) var(--space-3);
+		background: var(--color-surface-sunken);
+		border-radius: var(--radius-sm);
+		font-size: var(--text-sm);
+		color: var(--text-body);
+	}
+	.modal-field span:first-child { color: var(--text-muted); }
+	/* Orders table */
+	.modal-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+	.modal-table th { text-align: left; padding: var(--space-2) var(--space-3); color: var(--text-muted); border-bottom: 1px solid var(--border); }
+	.modal-table td { padding: var(--space-3); border-bottom: 1px solid var(--border); color: var(--text-body); }
+	/* Notifications */
+	.modal-notif-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+	.notif-item { padding: var(--space-3) var(--space-4); border-radius: var(--radius-sm); font-size: var(--text-sm); color: var(--text-body); background: var(--color-surface-sunken); }
+	.notif-unread { background: var(--color-primary-soft); color: var(--text-strong); }
+	/* Privacy toggles */
+	.modal-toggle-list { display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-2); }
+	.modal-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-4); background: var(--color-surface-sunken); border-radius: var(--radius-sm); font-size: var(--text-sm); }
+	.toggle-desc { font-size: var(--text-xs); color: var(--text-muted); font-weight: var(--fw-regular); }
+	.toggle-on { background: var(--color-primary); color: var(--text-inverse); font-size: var(--text-xs); font-weight: var(--fw-bold); padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); }
+	/* Plan upgrade */
+	.modal-plan-cards { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+	.modal-plan-card { flex: 1; min-width: 180px; border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--space-5); }
+	.modal-plan-current { background: var(--color-surface-sunken); }
+	.modal-plan-pro { background: var(--color-primary); color: var(--text-inverse); border-color: var(--color-primary); }
+	.modal-plan-pro ul li, .modal-plan-pro strong { color: var(--text-inverse); }
+	.plan-label { font-size: var(--text-xs); font-weight: var(--fw-bold); letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-2); }
+	.plan-label--pro { color: var(--color-highlight); }
+	.modal-plan-card strong { display: block; font-family: var(--font-display); margin-bottom: var(--space-2); }
+	.plan-price { font-size: var(--text-2xl); font-weight: var(--fw-heavy); font-family: var(--font-display); margin-bottom: var(--space-3); }
+	.plan-price span { font-size: var(--text-sm); font-weight: var(--fw-regular); }
+	.modal-plan-card ul { list-style: none; padding: 0; margin: 0; font-size: var(--text-sm); display: flex; flex-direction: column; gap: var(--space-1); }
+	/* Payment */
+	.modal-payment-options { display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-2); }
+	.payment-option { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: var(--text-sm); cursor: pointer; }
+	.payment-option--active { border-color: var(--color-primary); background: var(--color-primary-soft); }
+
 	/* ── Stage ─────────────────────────────────────── */
 	.stage {
 		width: 100%;
@@ -522,18 +919,6 @@
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-md);
 		padding: var(--space-7);
-	}
-
-	/* ── Annotation ────────────────────────────────── */
-	.annotation {
-		font-size: var(--text-sm);
-		color: var(--text-muted);
-		background: var(--amber-100);
-		border-left: 3px solid var(--color-highlight);
-		padding: var(--space-3) var(--space-4);
-		border-radius: var(--radius-sm);
-		width: 100%;
-		box-sizing: border-box;
 	}
 
 	/* ── Shared button styles ───────────────────────── */
@@ -723,13 +1108,14 @@
 	.fake-nav { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-sm); }
 	.fake-nav-item {
 		color: rgba(255,255,255,0.7);
-		cursor: default;
+		cursor: pointer;
 		background: none;
 		border: none;
 		font-family: var(--font-body);
 		font-size: var(--text-sm);
 		padding: 0;
 	}
+	.fake-nav-item:hover { color: var(--text-inverse); }
 	.fake-nav-item--account {
 		cursor: pointer;
 		color: var(--text-inverse);
@@ -758,9 +1144,10 @@
 		background: none;
 		border: none;
 		text-align: left;
-		cursor: default;
+		cursor: pointer;
 		border-bottom: 1px solid var(--border);
 	}
+	.fake-dd-item:hover { background: var(--color-surface-sunken); }
 	.fake-dd-item:last-child { border-bottom: none; }
 	.fake-dd-item--cta {
 		cursor: pointer;
@@ -793,16 +1180,6 @@
 		font-size: var(--text-sm);
 		color: var(--text-body);
 	}
-	.find-hint {
-		font-size: var(--text-sm);
-		color: var(--color-highlight);
-		background: var(--amber-100);
-		border-radius: var(--radius-sm);
-		padding: var(--space-3);
-		margin-top: var(--space-4);
-		margin-bottom: 0;
-	}
-
 	.fake-tabs {
 		display: flex;
 		flex-wrap: wrap;
@@ -863,8 +1240,10 @@
 		background: var(--color-primary-soft);
 		border: 1px solid var(--petrol-200);
 		border-radius: var(--radius-pill);
-		cursor: default;
+		cursor: pointer;
+		transition: background var(--duration-fast);
 	}
+	.fake-action-btn:hover { background: var(--petrol-200); }
 	.cancel-link-wrap {
 		padding-top: var(--space-5);
 		border-top: 1px solid var(--border);
