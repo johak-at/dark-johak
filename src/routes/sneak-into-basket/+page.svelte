@@ -1,5 +1,7 @@
 
 <script lang="ts">
+	import { base } from '$app/paths';
+
 	// ── State ─────────────────────────────────────────────────────────────────
 	let step = $state(1);
 
@@ -448,7 +450,7 @@
 									<strong>{Math.round((extrasTotal / ticketSub) * 100)} %</strong>
 									des eigentlichen Ticketpreises.
 								</p>
-								<a href="/sneak-into-basket/explanation" class="edu-link">
+								<a href="{base}/sneak-into-basket/explanation" class="edu-link">
 									Mehr über dieses Dark Pattern erfahren
 									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
 								</a>
@@ -478,7 +480,7 @@
 							Kostenpflichtig bestellen
 						</button>
 					{:else}
-						<a href="/sneak-into-basket/explanation" class="btn btn--primary">
+						<a href="{base}/sneak-into-basket/explanation" class="btn btn--primary">
 							Erklärung lesen
 							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
 						</a>
@@ -493,7 +495,7 @@
 	<footer class="site-footer">
 		<div class="site-footer__inner">
 			<span>© 2025 StageDoor Tickets GmbH — <em>Fiktives Beispiel für Bildungszwecke</em></span>
-			<a href="/sneak-into-basket/explanation">Dark Pattern Erklärung</a>
+			<a href="{base}/sneak-into-basket/explanation">Dark Pattern Erklärung</a>
 		</div>
 	</footer>
 </div>
