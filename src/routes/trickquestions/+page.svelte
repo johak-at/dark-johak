@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
   import { ChevronDown, AlertTriangle, Target, Eye, Brain, Zap } from 'lucide-svelte';
 
   let expanded: { [key: string]: boolean } = {};
@@ -265,7 +266,7 @@
         transparency. Design for people, not for conversion tricks.
       </p>
       <a
-        href="/"
+        href="{base}/"
         class="inline-block px-6 py-2 rounded-full font-bold text-sm uppercase tracking-wide transition-transform hover:scale-105"
         style="background-color: white; color: var(--color-primary)"
       >
