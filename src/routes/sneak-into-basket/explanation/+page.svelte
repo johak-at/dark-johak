@@ -1,8 +1,12 @@
+<script lang="ts">
+	import { base } from '$app/paths';
+</script>
+
 <div class="page">
 	<!-- ── Header ─────────────────────────────────────────────────────────── -->
 	<header class="site-header">
 		<div class="site-header__inner">
-			<a href="/sneak-into-basket" class="back-link">
+			<a href="{base}/sneak-into-basket" class="back-link">
 				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6" /></svg>
 				Zurück zur Demo
 			</a>
@@ -330,11 +334,11 @@
 
 			<!-- CTA -->
 			<div class="cta-row">
-				<a href="/sneak-into-basket" class="btn btn--primary">
+				<a href="{base}/sneak-into-basket" class="btn btn--primary">
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6" /></svg>
 					Zurück zur interaktiven Demo
 				</a>
-				<a href="/" class="btn btn--ghost">Alle Dark Patterns</a>
+				<a href="{base}/" class="btn btn--ghost">Alle Dark Patterns</a>
 			</div>
 		</div>
 	</main>
