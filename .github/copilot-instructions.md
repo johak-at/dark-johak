@@ -41,3 +41,18 @@ This is a pnpm repo (`pnpm-lock.yaml`). **Always use `pnpm`; never `npm` or `yar
 - `pnpm install`, `pnpm add <pkg>` / `pnpm add -D <pkg>`, `pnpm dlx <cmd>` (not `npx`).
 - Scripts: `pnpm dev`, `pnpm build`, `pnpm preview`, `pnpm check`, `pnpm lint`, `pnpm format`.
 - Never produce `package-lock.json` or `yarn.lock`, and never suggest `npm install`/`npx`.
+
+## Rule 3 — Always prefix internal links with the base path
+
+This app is deployed to GitHub Pages under a base path (`/dark-johak`), configured in
+`svelte.config.js` via `kit.paths.base`. **Every internal link or programmatic navigation must be
+prefixed with `base`** — never hard-code a root-absolute path like `href="/sneak-into-basket"`. A
+root-absolute internal link breaks in production and fails the prerender build with
+*"… does not begin with `base`"*.
+
+- Import the base: `import { base } from '$app/paths';`
+- Links: `` <a href={`${base}/sneak-into-basket`}> `` (or `href="{base}/sneak-into-basket"` in markup).
+  The home link is `` `${base}/` ``.
+- Programmatic nav: `goto(`${base}/path`)`.
+- This applies only to **internal** routes. Leave external URLs (`https://…`), `mailto:`, and
+  in-page anchors (`#id`) unprefixed.
