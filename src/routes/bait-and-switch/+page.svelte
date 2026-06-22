@@ -580,13 +580,27 @@
 	}
 
 	.list {
+		list-style: none;
 		margin: 0 0 var(--space-5);
-		padding-left: var(--space-5);
+		padding-left: 0;
 	}
 
 	.list li {
+		position: relative;
 		margin-bottom: var(--space-2);
+		padding-left: var(--space-5);
 		line-height: 1.5;
+	}
+
+	.list li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.55em;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--color-primary);
 	}
 
 	.cta-row {
