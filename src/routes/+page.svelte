@@ -1,5 +1,23 @@
 <script lang="ts">
   import { base } from '$app/paths';
+  import { onMount } from 'svelte';
+  import { getCompleted, PROGRESS_EVENT } from '$lib/progress';
+
+  let completed = $state<string[]>([]);
+
+  function refresh() {
+    completed = getCompleted();
+  }
+
+  onMount(() => {
+    refresh();
+    window.addEventListener(PROGRESS_EVENT, refresh);
+    window.addEventListener('storage', refresh);
+    return () => {
+      window.removeEventListener(PROGRESS_EVENT, refresh);
+      window.removeEventListener('storage', refresh);
+    };
+  });
 
   const routes = [
     { href: '/overloading', number: '01', tag: 'Überwältigung', title: 'OVER\u00ADLOADING', teaser: 'Zu viele Optionen auf einmal – bis du aufgibst und einfach auf „Weiter" klickst.', color: 'sky' },
@@ -59,7 +77,19 @@
     <div class="grid-inner">
       <div class="cards" lang="en">
         {#each routes as route (route.href)}
-          <a href={base + route.href} class="card" data-color={route.color}>
+          {@const done = completed.includes(route.href.slice(1))}
+          <a
+            href={base + route.href}
+            class="card"
+            class:card--done={done}
+            data-color={route.color}
+          >
+            {#if done}
+              <span class="card__done" lang="de">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+                Gelöst
+              </span>
+            {/if}
             <div class="card__number">{route.number}</div>
             <div class="card__content">
               <span class="card__tag">{route.tag}</span>
@@ -244,6 +274,32 @@
   .card:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-3px);
+  }
+
+  .card--done {
+    border-color: var(--color-success);
+  }
+
+  .card--done .card__number {
+    opacity: 0.18;
+  }
+
+  .card__done {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 4px var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--color-success);
+    color: var(--neutral-0);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    line-height: 1;
   }
 
   .card:focus-visible {
