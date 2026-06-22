@@ -343,6 +343,10 @@
 							<h2 class="step__title">Deine Bestellung</h2>
 							<p class="step__intro">Bitte prüfe deine Bestellung vor dem Kauf sorgfältig.</p>
 						{:else}
+							<div class="solved-badge" aria-label="Dark Pattern Aufgabe gelöst">
+								<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+								GELÖST
+							</div>
 							<h2 class="step__title step__title--reveal">
 								<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="vertical-align: -3px; margin-right: 6px;"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
 								Dark Pattern entdeckt!
@@ -724,6 +728,20 @@
 	}
 	.step__title--reveal {
 		color: var(--color-accent);
+	}
+	.solved-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		padding: var(--space-1) var(--space-3);
+		margin-bottom: var(--space-3);
+		border-radius: var(--radius-pill);
+		background: var(--color-success-soft);
+		border: 1px solid var(--color-success);
+		color: var(--color-success);
+		font-size: var(--text-xs);
+		font-weight: var(--fw-bold);
+		letter-spacing: var(--tracking-wider);
 	}
 	.step__intro {
 		font-size: var(--text-sm);

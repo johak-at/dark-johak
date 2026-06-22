@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { base } from '$app/paths';
+	import { markCompleted } from '$lib/progress';
+
 	// Multi-step form demonstrating the "Confirmshaming" dark pattern.
 	// Each step has a primary CTA and a confirmshaming decline button that
 	// uses guilt-inducing language instead of a neutral "Nein danke".
@@ -142,7 +145,12 @@
 						</ul>
 					</div>
 
-					<button class="btn btn--primary" onclick={restart}>Nochmal durchspielen</button>
+					<div class="card__actions">
+						<button class="btn btn--primary" onclick={restart}>Nochmal durchspielen</button>
+						<a class="btn btn--primary" href={`${base}/`} onclick={() => markCompleted('confirmshaming')}>
+							Zurück zur Übersicht
+						</a>
+					</div>
 				</div>
 			</div>
 		{/if}
