@@ -36,11 +36,18 @@
 					<p class="tarif__name">SchulCloud Plus</p>
 					<p class="tarif__preis">12,90 € / Monat</p>
 					<p class="tarif__hinweis">Empfohlen für alle Klassen</p>
+					<ul class="tarif__liste">
+						<li>Unbegrenzter Cloud-Speicher für Projekte</li>
+						<li>KI-Lernassistenz mit Sofort-Feedback</li>
+						<li>Priorisierte Abgabe-Checks vor Prüfungen</li>
+						<li>Eltern- und Lehrkraft-Reports in Echtzeit</li>
+					</ul>
+					<p class="tarif__vorteil">So verpasst du keine Frist und bist bei Tests immer vorbereitet.</p>
 				</button>
 
 				<button
 					type="button"
-					class={`tarif ${tarif === 'basis' ? 'tarif--aktiv' : ''}`}
+					class={`tarif tarif--dezent ${tarif === 'basis' ? 'tarif--aktiv' : ''}`}
 					onclick={() => (tarif = 'basis')}
 				>
 					<p class="tarif__name">SchulCloud Basis</p>
@@ -151,6 +158,26 @@
 		box-shadow: var(--shadow-md);
 	}
 
+	.tarif--dezent {
+		width: 86%;
+		justify-self: start;
+		padding: var(--space-3);
+		background: var(--neutral-50);
+		opacity: 0.82;
+	}
+
+	.tarif--dezent .tarif__name {
+		font-size: var(--text-sm);
+	}
+
+	.tarif--dezent .tarif__preis {
+		font-size: var(--text-base);
+	}
+
+	.tarif--dezent .tarif__hinweis {
+		font-size: var(--text-xs);
+	}
+
 	.tarif:active {
 		transform: scale(0.99);
 	}
@@ -172,6 +199,22 @@
 		margin: 0;
 		font-size: var(--text-sm);
 		color: var(--text-muted);
+	}
+
+	.tarif__liste {
+		margin: var(--space-3) 0 var(--space-2);
+		padding-left: var(--space-4);
+		display: grid;
+		gap: var(--space-1);
+		font-size: var(--text-sm);
+		color: var(--text-body);
+	}
+
+	.tarif__vorteil {
+		margin: 0;
+		font-size: var(--text-sm);
+		font-weight: var(--fw-semibold);
+		color: var(--color-primary);
 	}
 
 	.checkbox {
