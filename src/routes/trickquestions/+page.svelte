@@ -107,11 +107,11 @@
 	<title>Trick Questions – Dunkle Muster & Täuschende UX</title>
 </svelte:head>
 
-<div class="min-h-screen bg-white">
+<div class="trickquestions-page min-h-screen">
 	<!-- Header -->
 	<header class="border-b" style="border-color: var(--border)">
-		<div class="container mx-auto px-6 py-12">
-			<div class="max-w-3xl">
+		<div class="container mx-auto px-6 py-14">
+			<div class="max-w-4xl">
 				<div class="mb-4 flex items-center gap-3">
 					<div class="rounded-lg p-2" style="background-color: var(--color-surface)">
 						<AlertTriangle size={24} style="color: var(--color-accent)" />
@@ -121,7 +121,7 @@
 					</span>
 				</div>
 				<h1
-					class="mb-4 text-5xl font-bold uppercase"
+					class="mb-4 text-4xl font-bold uppercase md:text-5xl"
 					style="font-family: var(--font-display); color: var(--color-primary); letter-spacing: -0.02em"
 				>
 					Trick Questions
@@ -137,7 +137,7 @@
 
 	<!-- Intro Section -->
 	<section class="container mx-auto px-6 py-12">
-		<div class="grid max-w-3xl grid-cols-3 gap-6">
+		<div class="grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
 			<div>
 				<div
 					class="mb-3 inline-block rounded-lg p-3"
@@ -191,7 +191,7 @@
 
 	<section class="container mx-auto px-6 pb-12">
 		<div
-			class="max-w-3xl rounded-lg border p-6"
+			class="max-w-5xl rounded-lg border p-7 shadow-sm"
 			style="border-color: var(--border); background-color: var(--color-surface)"
 		>
 			<h2
@@ -201,64 +201,16 @@
 				Demo-Beispiele (2 verfügbar)
 			</h2>
 			<p class="mb-4" style="color: var(--text-body)">
-				Hier siehst du zwei Fangfragen aus typischen Oberflächen. In beiden Fällen klingt die
-				Ablehnung absichtlich unattraktiv.
+				Öffne die eigene Beispielseite und teste zwei interaktive Fangfragen. Dort kannst du die
+				Buttons direkt anklicken und danach wieder zurück auf diese Demo-Seite wechseln.
 			</p>
-			<div
-				class="mb-4 rounded-lg p-4"
-				style="background-color: var(--color-bg); border: 1px solid var(--border)"
+			<a
+				href={`${base}/trickquestions/examples`}
+				class="inline-block rounded-full px-6 py-3 text-sm font-bold tracking-wide uppercase transition-transform hover:scale-105"
+				style="background-color: var(--color-primary); color: var(--text-inverse)"
 			>
-				<p class="mb-3 font-bold" style="color: var(--text-strong)">Willst du 10 % sparen?</p>
-				<div class="flex flex-wrap gap-3">
-					<button
-						type="button"
-						class="rounded-full px-4 py-2 text-sm font-semibold"
-						style="background-color: var(--color-primary); color: var(--text-inverse)"
-					>
-						Ja, Rabatt sichern
-					</button>
-					<button
-						type="button"
-						class="rounded-full px-4 py-2 text-sm font-semibold"
-						style="background-color: var(--color-surface); color: var(--text-body); border: 1px solid var(--border)"
-					>
-						Nein, ich zahle lieber mehr
-					</button>
-				</div>
-			</div>
-			<p style="color: var(--text-body)">
-				Faire Variante: <strong>"Rabatt aktivieren"</strong> und
-				<strong>"Ohne Rabatt fortfahren"</strong>.
-			</p>
-
-			<div
-				class="mt-6 mb-4 rounded-lg p-4"
-				style="background-color: var(--color-bg); border: 1px solid var(--border)"
-			>
-				<p class="mb-3 font-bold" style="color: var(--text-strong)">
-					Möchtest du unseren Newsletter abonnieren?
-				</p>
-				<div class="flex flex-wrap gap-3">
-					<button
-						type="button"
-						class="rounded-full px-4 py-2 text-sm font-semibold"
-						style="background-color: var(--color-primary); color: var(--text-inverse)"
-					>
-						Ja, exklusive Tipps erhalten
-					</button>
-					<button
-						type="button"
-						class="rounded-full px-4 py-2 text-sm font-semibold"
-						style="background-color: var(--color-surface); color: var(--text-body); border: 1px solid var(--border)"
-					>
-						Nein, ich verzichte auf Informationen
-					</button>
-				</div>
-			</div>
-			<p style="color: var(--text-body)">
-				Faire Variante: <strong>"Newsletter abonnieren"</strong> und
-				<strong>"Ohne Newsletter fortfahren"</strong>.
-			</p>
+				Beispiele öffnen
+			</a>
 		</div>
 	</section>
 
@@ -271,11 +223,11 @@
 			8 Häufige Fangfragen
 		</h2>
 
-		<div class="space-y-4">
+		<div class="mx-auto max-w-5xl space-y-4">
 			{#each trickquestions as pattern (pattern.id)}
 				<button
 					type="button"
-					class="w-full cursor-pointer rounded-lg border text-left transition-all"
+					class="w-full cursor-pointer rounded-lg border text-left shadow-sm transition-all hover:shadow-md"
 					style="
             border-color: var(--border);
             background-color: {expanded[pattern.id] ? 'var(--color-surface)' : 'transparent'};
@@ -285,9 +237,7 @@
 					<!-- Header -->
 					<div
 						class="hover:bg-opacity-50 flex items-start justify-between gap-4 p-6 transition"
-						style="background-color: {expanded[pattern.id]
-							? 'rgba(0, 85, 119, 0.02)'
-							: 'transparent'}"
+						style="background-color: {expanded[pattern.id] ? 'var(--violet-100)' : 'transparent'}"
 					>
 						<div class="flex-1">
 							<h3 class="mb-2 text-lg font-bold" style="color: var(--text-strong)">
@@ -324,7 +274,7 @@
 								</h4>
 								<p
 									class="rounded-lg p-4"
-									style="background-color: var(--color-bg); color: var(--text-body); border-left: 3px solid var(--color-accent)"
+									style="background-color: var(--violet-100); color: var(--text-body); border-left: 3px solid var(--color-violet)"
 								>
 									{pattern.example}
 								</p>
@@ -351,7 +301,7 @@
 								</h4>
 								<p
 									class="rounded-lg p-4"
-									style="background-color: rgba(0, 170, 0, 0.05); color: var(--text-body); border-left: 3px solid var(--color-success)"
+									style="background-color: var(--violet-200); color: var(--text-body); border-left: 3px solid var(--violet-400)"
 								>
 									{pattern.solution}
 								</p>
@@ -366,7 +316,7 @@
 	<!-- CTA Section -->
 	<section class="container mx-auto px-6 py-12">
 		<div
-			class="rounded-lg p-8 text-center"
+			class="mx-auto max-w-5xl rounded-lg p-8 text-center shadow-sm"
 			style="background: linear-gradient(135deg, var(--color-sky), var(--color-primary)); color: white"
 		>
 			<Zap size={32} class="mb-4 inline-block" style="opacity: 0.8" />
@@ -388,7 +338,10 @@
 	</section>
 
 	<!-- Footer Note -->
-	<footer class="container mx-auto px-6 py-8 text-center text-sm" style="color: var(--text-muted)">
+	<footer
+		class="container mx-auto max-w-5xl px-6 py-8 text-center text-sm"
+		style="color: var(--text-muted)"
+	>
 		<p>
 			Lerne mehr auf <a
 				href="https://www.darkpatterns.org"
@@ -415,8 +368,17 @@
 </div>
 
 <style>
+	.trickquestions-page {
+		--color-bg: var(--violet-100);
+		--color-surface: var(--neutral-0);
+		--color-primary: var(--color-violet);
+		--color-accent: var(--violet-500);
+		--color-highlight: var(--violet-400);
+		--color-sky: var(--violet-300);
+	}
+
 	:global(body) {
-		background-color: white;
+		background-color: var(--violet-100);
 	}
 
 	button {

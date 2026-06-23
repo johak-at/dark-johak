@@ -6,120 +6,139 @@
    ============================================================ */
 
 :root {
-  /* ---- Brand primaries (Farbe 1–4) ---- */
-  --johak-sky:    #80CCDB; /* Farbe 1 — Pantone 297  | hellblau   */
-  --johak-petrol: #005577; /* Farbe 2 — Pantone 7691 | petrol     */
-  --johak-red:    #E4003A; /* Farbe 3 — Pantone 192  | signalrot  */
-  --johak-amber:  #F7A823; /* Farbe 4 — Pantone 7549 | orange     */
+	/* ---- Brand primaries (Farbe 1–4) ---- */
+	--johak-sky: #80ccdb; /* Farbe 1 — Pantone 297  | hellblau   */
+	--johak-petrol: #005577; /* Farbe 2 — Pantone 7691 | petrol     */
+	--johak-red: #e4003a; /* Farbe 3 — Pantone 192  | signalrot  */
+	--johak-amber: #f7a823; /* Farbe 4 — Pantone 7549 | orange     */
 
-  /* ---- Brand darks (Farbe 5) ---- */
-  --johak-navy:   #1A2E3C; /* Pantone 2767  | tiefes nachtblau */
-  --johak-ink:    #180F00; /* Pantone Black 6 | warmes schwarz */
+	/* ---- Brand darks (Farbe 5) ---- */
+	--johak-navy: #1a2e3c; /* Pantone 2767  | tiefes nachtblau */
+	--johak-ink: #180f00; /* Pantone Black 6 | warmes schwarz */
 
-  /* ---- Sky scale ---- */
-  --sky-100: #E4F4F8;
-  --sky-200: #C5E8EF;
-  --sky-300: #A6DBE5;
-  --sky-400: #80CCDB; /* base */
-  --sky-500: #58B4C7;
-  --sky-600: #3A95A9;
+	/* ---- Sky scale ---- */
+	--sky-100: #e4f4f8;
+	--sky-200: #c5e8ef;
+	--sky-300: #a6dbe5;
+	--sky-400: #80ccdb; /* base */
+	--sky-500: #58b4c7;
+	--sky-600: #3a95a9;
 
-  /* ---- Petrol scale ---- */
-  --petrol-100: #DCEAEF;
-  --petrol-200: #A9CCD7;
-  --petrol-300: #5E94A7;
-  --petrol-400: #2A7188;
-  --petrol-500: #005577; /* base */
-  --petrol-600: #00415C;
-  --petrol-700: #002F43;
+	/* ---- Petrol scale ---- */
+	--petrol-100: #dceaef;
+	--petrol-200: #a9ccd7;
+	--petrol-300: #5e94a7;
+	--petrol-400: #2a7188;
+	--petrol-500: #005577; /* base */
+	--petrol-600: #00415c;
+	--petrol-700: #002f43;
 
-  /* ---- Red scale ---- */
-  --red-100: #FCDBE3;
-  --red-200: #F7A6B9;
-  --red-300: #F05E80;
-  --red-400: #E4003A; /* base */
-  --red-500: #C00031;
-  --red-600: #970026;
+	/* ---- Red scale ---- */
+	--red-100: #fcdbe3;
+	--red-200: #f7a6b9;
+	--red-300: #f05e80;
+	--red-400: #e4003a; /* base */
+	--red-500: #c00031;
+	--red-600: #970026;
 
-  /* ---- Amber scale ---- */
-  --amber-100: #FDEDD0;
-  --amber-200: #FBD79A;
-  --amber-300: #F9C064;
-  --amber-400: #F7A823; /* base */
-  --amber-500: #DD8C0A;
-  --amber-600: #B06E06;
+	/* ---- Amber scale ---- */
+	--amber-100: #fdedd0;
+	--amber-200: #fbd79a;
+	--amber-300: #f9c064;
+	--amber-400: #f7a823; /* base */
+	--amber-500: #dd8c0a;
+	--amber-600: #b06e06;
 
-  /* ---- Neutral scale (cool, drawn toward navy) ---- */
-  --neutral-0:   #FFFFFF;
-  --neutral-50:  #F4F8F9;
-  --neutral-100: #EAF0F2;
-  --neutral-200: #D7E0E4;
-  --neutral-300: #BAC8CE;
-  --neutral-400: #8C9CA4;
-  --neutral-500: #61727A;
-  --neutral-600: #45555D;
-  --neutral-700: #2F3F47;
-  --neutral-800: #1A2E3C; /* = navy */
-  --neutral-900: #102129;
-  --neutral-950: #0A161C;
+	/* ---- Violet scale (extended token for interactive demos) ---- */
+	--violet-100: #f3e8ff;
+	--violet-200: #ddd6fe;
+	--violet-300: #c4b5fd;
+	--violet-400: #a78bfa;
+	--violet-500: #8b5cf6;
+	--violet-600: #7c3aed;
+	--violet-700: #6d28d9;
 
-  /* ============================================================
+	/* ---- Neutral scale (cool, drawn toward navy) ---- */
+	--neutral-0: #ffffff;
+	--neutral-50: #f4f8f9;
+	--neutral-100: #eaf0f2;
+	--neutral-200: #d7e0e4;
+	--neutral-300: #bac8ce;
+	--neutral-400: #8c9ca4;
+	--neutral-500: #61727a;
+	--neutral-600: #45555d;
+	--neutral-700: #2f3f47;
+	--neutral-800: #1a2e3c; /* = navy */
+	--neutral-900: #102129;
+	--neutral-950: #0a161c;
+
+	/* ============================================================
      SEMANTIC ALIASES
      ============================================================ */
 
-  /* Surfaces & background */
-  --color-bg:             var(--neutral-50);
-  --color-surface:        var(--neutral-0);
-  --color-surface-sunken: var(--neutral-100);
-  --color-surface-inverse: var(--johak-navy);
+	/* Surfaces & background */
+	--color-bg: var(--neutral-50);
+	--color-surface: var(--neutral-0);
+	--color-surface-sunken: var(--neutral-100);
+	--color-surface-inverse: var(--johak-navy);
 
-  /* Text */
-  --text-strong:   var(--johak-ink);
-  --text-body:     var(--neutral-700);
-  --text-muted:    var(--neutral-500);
-  --text-subtle:   var(--neutral-400);
-  --text-inverse:  var(--neutral-0);
-  --text-on-brand: var(--neutral-0);
+	/* Text */
+	--text-strong: var(--johak-ink);
+	--text-body: var(--neutral-700);
+	--text-muted: var(--neutral-500);
+	--text-subtle: var(--neutral-400);
+	--text-inverse: var(--neutral-0);
+	--text-on-brand: var(--neutral-0);
 
-  /* Borders & lines */
-  --border:        var(--neutral-200);
-  --border-strong: var(--neutral-300);
-  --border-inverse: rgba(255, 255, 255, 0.16);
+	/* Borders & lines */
+	--border: var(--neutral-200);
+	--border-strong: var(--neutral-300);
+	--border-inverse: rgba(255, 255, 255, 0.16);
 
-  /* Brand roles */
-  --color-primary:        var(--petrol-500);
-  --color-primary-hover:  var(--petrol-600);
-  --color-primary-active: var(--petrol-700);
-  --color-primary-soft:   var(--petrol-100);
-  --color-on-primary:     var(--neutral-0);
+	/* Brand roles */
+	--color-primary: var(--petrol-500);
+	--color-primary-hover: var(--petrol-600);
+	--color-primary-active: var(--petrol-700);
+	--color-primary-soft: var(--petrol-100);
+	--color-on-primary: var(--neutral-0);
 
-  --color-accent:         var(--red-400);
-  --color-accent-hover:   var(--red-500);
-  --color-accent-soft:    var(--red-100);
-  --color-on-accent:      var(--neutral-0);
+	--color-accent: var(--red-400);
+	--color-accent-hover: var(--red-500);
+	--color-accent-soft: var(--red-100);
+	--color-on-accent: var(--neutral-0);
 
-  --color-highlight:      var(--amber-400);
-  --color-highlight-hover: var(--amber-500);
-  --color-highlight-soft: var(--amber-100);
-  --color-on-highlight:   var(--johak-ink);
+	--color-highlight: var(--amber-400);
+	--color-highlight-hover: var(--amber-500);
+	--color-highlight-soft: var(--amber-100);
+	--color-on-highlight: var(--johak-ink);
 
-  --color-sky:            var(--sky-400);
-  --color-sky-soft:       var(--sky-100);
+	--color-sky: var(--sky-400);
+	--color-sky-soft: var(--sky-100);
 
-  /* Status (brand-aligned) */
-  --color-success:      #1E9E6A;
-  --color-success-soft: #DCF1E8;
-  --color-warning:      var(--amber-400);
-  --color-warning-soft: var(--amber-100);
-  --color-error:        var(--red-400);
-  --color-error-soft:   var(--red-100);
-  --color-info:         var(--petrol-500);
-  --color-info-soft:    var(--petrol-100);
+	--color-violet: var(--violet-600);
+	--color-violet-hover: var(--violet-700);
+	--color-violet-soft: var(--violet-100);
 
-  /* Focus */
-  --focus-ring: var(--sky-500);
+	/* Status (brand-aligned) */
+	--color-success: #1e9e6a;
+	--color-success-soft: #dcf1e8;
+	--color-warning: var(--amber-400);
+	--color-warning-soft: var(--amber-100);
+	--color-error: var(--red-400);
+	--color-error-soft: var(--red-100);
+	--color-info: var(--petrol-500);
+	--color-info-soft: var(--petrol-100);
 
-  /* Signet gradient (the four-colour mark) */
-  --gradient-signet: linear-gradient(105deg, var(--johak-navy) 0%, var(--johak-petrol) 45%, var(--johak-sky) 100%);
-  --gradient-sky:    linear-gradient(120deg, var(--johak-petrol) 0%, var(--johak-sky) 100%);
+	/* Focus */
+	--focus-ring: var(--sky-500);
+
+	/* Signet gradient (the four-colour mark) */
+	--gradient-signet: linear-gradient(
+		105deg,
+		var(--johak-navy) 0%,
+		var(--johak-petrol) 45%,
+		var(--johak-sky) 100%
+	);
+	--gradient-sky: linear-gradient(120deg, var(--johak-petrol) 0%, var(--johak-sky) 100%);
+	--gradient-violet: linear-gradient(120deg, var(--violet-700) 0%, var(--violet-500) 100%);
 }
