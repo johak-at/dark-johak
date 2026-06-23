@@ -26,6 +26,7 @@
 		BadgePercent,
 		ThumbsUp
 	} from 'lucide-svelte';
+	import { base } from '$app/paths';
 
 	// ── Step state ───────────────────────────────────────────────
 	let step = $state(1);
@@ -1205,6 +1206,19 @@
 		{/if}
 
 	</main>
+
+	<section class="pattern-summary" aria-labelledby="pattern-summary-title">
+		<div class="pattern-summary__inner">
+			<h2 id="pattern-summary-title">Kurz erklärt: Overloading</h2>
+			<p>
+				Bei diesem Dark Pattern werden Nutzer:innen mit zu vielen Optionen, Hinweisen und
+				drängenden Signalen überladen, damit sie schneller klicken statt bewusst zu entscheiden.
+			</p>
+			<a class="btn-primary pattern-summary__home" href={`${base}/`}>
+				Zurück zur dark-johak Startseite
+			</a>
+		</div>
+	</section>
 
 	<!-- SHOP FOOTER -->
 	<footer class="shop-footer">
@@ -2456,6 +2470,44 @@
 	padding-top: var(--space-5);
 	border-top: 1px solid var(--border);
 	margin-top: var(--space-2);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DARK-PATTERN SUMMARY
+════════════════════════════════════════════════════════════════ */
+.pattern-summary {
+	margin-top: var(--space-10);
+	padding: 0 var(--space-5);
+}
+.pattern-summary__inner {
+	max-width: var(--container-md);
+	margin: 0 auto;
+	background: var(--color-surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-card);
+	box-shadow: var(--shadow-sm);
+	padding: var(--space-6);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-4);
+}
+.pattern-summary__inner h2 {
+	margin: 0;
+	font-family: var(--font-display);
+	font-size: var(--text-xl);
+	letter-spacing: var(--tracking-wide);
+	text-transform: uppercase;
+	color: var(--text-strong);
+}
+.pattern-summary__inner p {
+	margin: 0;
+	font-size: var(--text-base);
+	line-height: var(--leading-relaxed);
+	color: var(--text-body);
+}
+.pattern-summary__home {
+	align-self: flex-start;
+	text-decoration: none;
 }
 
 /* ════════════════════════════════════════════════════════════════
