@@ -1,12 +1,27 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { onMount } from 'svelte';
+	import { getCompleted, PROGRESS_EVENT } from '$lib/progress';
 
 	const trickquestionsStorageKey = 'dark-pattern-trickquestions-solved';
-	let trickquestionsSolved = $state(false);
+	let completed = $state<string[]>([]);
+
+	function refreshCompleted() {
+		const merged = new Set(getCompleted());
+		if (localStorage.getItem(trickquestionsStorageKey) === 'true') {
+			merged.add('trickquestions');
+		}
+		completed = [...merged];
+	}
 
 	onMount(() => {
-		trickquestionsSolved = localStorage.getItem(trickquestionsStorageKey) === 'true';
+		refreshCompleted();
+		window.addEventListener(PROGRESS_EVENT, refreshCompleted);
+		window.addEventListener('storage', refreshCompleted);
+		return () => {
+			window.removeEventListener(PROGRESS_EVENT, refreshCompleted);
+			window.removeEventListener('storage', refreshCompleted);
+		};
 	});
 
 	const routes = [
@@ -132,9 +147,10 @@
 		<div class="grid-inner">
 			<div class="cards" lang="en">
 				{#each routes as route (route.href)}
+					{@const done = completed.includes(route.href.slice(1))}
 					<a href={base + route.href} class="card" data-color={route.color}>
-						{#if route.href === '/trickquestions' && trickquestionsSolved}
-							<span class="card__solved" aria-label="Gelöst">Gelöst</span>
+						{#if done}
+							<span class="card__solved" aria-label="GELÖST">GELÖST</span>
 						{/if}
 						<div class="card__number">{route.number}</div>
 						<div class="card__content">

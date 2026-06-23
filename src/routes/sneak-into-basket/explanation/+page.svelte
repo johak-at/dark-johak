@@ -41,15 +41,9 @@
 					ein Dark Pattern, bei dem Anbieter zusätzliche Produkte, Versicherungen oder
 					Abonnements <em>ohne aktive Zustimmung</em> des Nutzers zur Bestellung hinzufügen.
 				</p>
-				<p>
-					Typischerweise geschieht dies durch <strong>vorausgewählte Checkboxen</strong>
-					(Pre-Checked Checkboxes): Zusatzleistungen sind standardmäßig aktiviert, und der Nutzer
-					muss sie aktiv <em>abwählen</em>, um sie loszuwerden — statt sie aktiv
-					<em>hinzuzufügen</em>.
-				</p>
 				<div class="definition-box">
-					<strong>Kernmerkmal:</strong> Der Nutzer wird vom Opt-in-Prinzip (aktiv zustimmen) zum
-					Opt-out-Prinzip (aktiv ablehnen) gezwungen — ohne dass dies klar kommuniziert wird.
+					<strong>Kernmerkmal:</strong> Extras sind oft schon aktiviert. Du musst aktiv
+					<em>abwählen</em>, statt aktiv zuzustimmen.
 				</div>
 			</section>
 
@@ -97,10 +91,6 @@
 					Online-Kauf unzulässig (Verbraucherrechterichtlinie, Art. 22). In Österreich wird das u. a.
 					im <strong>KSchG (§ 6a)</strong> umgesetzt.
 				</p>
-				<p>
-					Für Einwilligungen wie Newsletter gilt zusätzlich: Häkchen müssen aktiv gesetzt werden
-					(DSGVO Art. 7). Vorangekreuzte Felder gelten nicht als wirksame Zustimmung.
-				</p>
 			</section>
 
 			<!-- Recognition tips -->
@@ -117,11 +107,9 @@
 							So schützt du dich
 						</div>
 						<ul>
-							<li>Scrolle auf <em>jeder</em> Checkout-Seite alle Optionen durch</li>
-							<li>Prüfe kleine Checkboxen neben längeren Beschreibungstexten</li>
-							<li>Vergleiche die Gesamtsumme mit deiner ursprünglichen Erwartung</li>
-							<li>Alles, was du nicht aktiv willst, sofort abwählen</li>
-							<li>Bei unklaren Abbuchungen Rechnung und Buchung sofort reklamieren</li>
+							<li>Prüfe auf jeder Checkout-Seite alle Checkboxen</li>
+							<li>Vergleiche Zwischensumme und Endpreis</li>
+							<li>Wähle Extras sofort ab, wenn du sie nicht willst</li>
 						</ul>
 					</div>
 					<div class="tip tip--dont">
@@ -131,11 +119,9 @@
 						</div>
 						<ul>
 							<li>Häkchen in Abschnitten, die du nicht aktiv ausgefüllt hast</li>
-							<li>Preise nur in kleiner Schrift innerhalb langer Beschreibungen</li>
 							<li>Abschnitte heißen „Empfohlen" statt „Optional"</li>
-							<li>Negative Opt-out-Texte: „Ich verzichte auf..."</li>
 							<li>Gesamtpreis erscheint erst im letzten Schritt</li>
-							<li>„Beliebt"-Badges auf vorausgewählten Extras</li>
+							<li>Preise stehen klein im Fließtext statt klar daneben</li>
 						</ul>
 					</div>
 				</div>

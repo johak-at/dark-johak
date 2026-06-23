@@ -1,6 +1,7 @@
 
 <script lang="ts">
 	import { base } from '$app/paths';
+	import { markCompleted } from '$lib/progress';
 
 	// ── State ─────────────────────────────────────────────────────────────────
 	let step = $state(1);
@@ -65,10 +66,21 @@
 	}
 
 	function advance() {
-		if (isValid()) step = Math.min(step + 1, 4);
+		if (!isValid()) return;
+		const nextStep = Math.min(step + 1, 4);
+		if (nextStep === 4) {
+			markCompleted('sneak-into-basket');
+		}
+		step = nextStep;
 	}
 	function retreat() {
 		step = Math.max(step - 1, 1);
+	}
+
+	function revealPattern() {
+		if (revealed) return;
+		revealed = true;
+		markCompleted('sneak-into-basket');
 	}
 </script>
 
@@ -417,7 +429,7 @@
 
 						<!-- Reveal trigger / Educational callout -->
 						{#if !revealed}
-							<button class="reveal-btn" onclick={() => (revealed = true)}>
+							<button class="reveal-btn" onclick={revealPattern}>
 								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
 								Warum ist der Preis so hoch? Zeig mir, was hier passiert
 							</button>
@@ -480,7 +492,7 @@
 							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6" /></svg>
 						</button>
 					{:else if !revealed}
-						<button class="btn btn--primary" onclick={() => (revealed = true)}>
+						<button class="btn btn--primary" onclick={revealPattern}>
 							Kostenpflichtig bestellen
 						</button>
 					{:else}
