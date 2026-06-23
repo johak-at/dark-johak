@@ -66,7 +66,12 @@
 	}
 
 	function advance() {
-		if (isValid()) step = Math.min(step + 1, 4);
+		if (!isValid()) return;
+		const nextStep = Math.min(step + 1, 4);
+		if (nextStep === 4) {
+			markCompleted('sneak-into-basket');
+		}
+		step = nextStep;
 	}
 	function retreat() {
 		step = Math.max(step - 1, 1);
