@@ -8,6 +8,12 @@
 	let tarif = $state<Tarif>(null);
 	let agbAkzeptiert = $state(false);
 	let abgeschlossen = $state(false);
+	let popupSichtbar = $state(false);
+
+	$effect(() => {
+		const t = setTimeout(() => (popupSichtbar = true), 3000);
+		return () => clearTimeout(t);
+	});
 
 	const tarifNamen = {
 		plus: 'SchulCloud Plus',
@@ -21,6 +27,20 @@
 		abgeschlossen = true;
 	}
 </script>
+
+{#if popupSichtbar}
+	<div class="popup-overlay">
+		<div class="popup" role="alertdialog" aria-modal="true" aria-label="Gewinnbenachrichtigung">
+			<button class="popup__close" type="button" onclick={() => (popupSichtbar = false)} aria-label="Schließen">✕</button>
+			<a
+				class="popup__link"
+				href={`${base}/misdirection/gewinn`}
+			>
+				🎉 You won a free URS Edition Ryzen 4070!
+			</a>
+		</div>
+	</div>
+{/if}
 
 <main class={`seite ${ansicht === 'praxis' ? 'seite--praxis' : ''}`}>
 	{#if ansicht === 'praxis'}
@@ -302,6 +322,56 @@
 	}
 
 	.zurueck:hover {
+		color: var(--color-primary-hover);
+	}
+
+	.popup-overlay {
+		position: fixed;
+		bottom: var(--space-6);
+		right: var(--space-6);
+		z-index: 100;
+	}
+
+	.popup {
+		position: relative;
+		background: var(--color-surface);
+		border: var(--border-width) solid var(--color-highlight);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-xl);
+		padding: var(--space-6) var(--space-8);
+		max-width: min(90vw, 26rem);
+		text-align: center;
+	}
+
+	.popup__close {
+		position: absolute;
+		top: var(--space-2);
+		right: var(--space-2);
+		background: none;
+		border: none;
+		font-size: var(--text-base);
+		color: var(--text-muted);
+		cursor: pointer;
+		line-height: 1;
+		padding: var(--space-1);
+		border-radius: var(--radius-pill);
+		transition: color var(--duration-fast) var(--ease-standard);
+	}
+
+	.popup__close:hover {
+		color: var(--text-strong);
+	}
+
+	.popup__link {
+		display: block;
+		font-family: var(--font-display);
+		font-size: var(--text-lg);
+		font-weight: var(--fw-bold);
+		color: var(--color-primary);
+		text-decoration: underline;
+	}
+
+	.popup__link:hover {
 		color: var(--color-primary-hover);
 	}
 </style>
